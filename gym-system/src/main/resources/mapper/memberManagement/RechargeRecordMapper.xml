@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gym.memberManagement.mapper.RechargeRecordMapper">
+    
+    <resultMap type="RechargeRecord" id="RechargeRecordResult">
+        <result property="recordId"    column="record_id"    />
+        <result property="memberId"    column="member_id"    />
+        <result property="amount"    column="amount"    />
+        <result property="type"    column="type"    />
+        <result property="paymentMethod"    column="payment_method"    />
+        <result property="transactionTime"    column="transaction_time"    />
+        <result property="operatorId"    column="operator_id"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectRechargeRecordVo">
+        select record_id, member_id, amount, type, payment_method, transaction_time, operator_id, create_by, create_time, update_by, update_time, remark from recharge_record
+    </sql>
+
+    <select id="selectRechargeRecordList" parameterType="RechargeRecord" resultMap="RechargeRecordResult">
+        <include refid="selectRechargeRecordVo"/>
+        <where>  
+            <if test="memberId != null "> and member_id = #{memberId}</if>
+            <if test="amount != null "> and amount = #{amount}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="paymentMethod != null  and paymentMethod != ''"> and payment_method = #{paymentMethod}</if>
+            <if test="transactionTime != null "> and transaction_time = #{transactionTime}</if>
+            <if test="operatorId != null "> and operator_id = #{operatorId}</if>
+        </where>
+    </select>
+    
+    <select id="selectRechargeRecordByRecordId" parameterType="Long" resultMap="RechargeRecordResult">
+        <include refid="selectRechargeRecordVo"/>
+        where record_id = #{recordId}
+    </select>
+
+    <insert id="insertRechargeRecord" parameterType="RechargeRecord" useGeneratedKeys="true" keyProperty="recordId">
+        insert into recharge_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="memberId != null">member_id,</if>
+            <if test="amount != null">amount,</if>
+            <if test="type != null">type,</if>
+            <if test="paymentMethod != null">payment_method,</if>
+            <if test="transactionTime != null">transaction_time,</if>
+            <if test="operatorId != null">operator_id,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="memberId != null">#{memberId},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="type != null">#{type},</if>
+            <if test="paymentMethod != null">#{paymentMethod},</if>
+            <if test="transactionTime != null">#{transactionTime},</if>
+            <if test="operatorId != null">#{operatorId},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateRechargeRecord" parameterType="RechargeRecord">
+        update recharge_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="memberId != null">member_id = #{memberId},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="paymentMethod != null">payment_method = #{paymentMethod},</if>
+            <if test="transactionTime != null">transaction_time = #{transactionTime},</if>
+            <if test="operatorId != null">operator_id = #{operatorId},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where record_id = #{recordId}
+    </update>
+
+    <delete id="deleteRechargeRecordByRecordId" parameterType="Long">
+        delete from recharge_record where record_id = #{recordId}
+    </delete>
+
+    <delete id="deleteRechargeRecordByRecordIds" parameterType="String">
+        delete from recharge_record where record_id in 
+        <foreach item="recordId" collection="array" open="(" separator="," close=")">
+            #{recordId}
+        </foreach>
+    </delete>
+</mapper>

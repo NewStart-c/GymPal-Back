@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gym.trainerManagement.mapper.TrainerMapper">
+    
+    <resultMap type="Trainer" id="TrainerResult">
+        <result property="trainerId"    column="trainer_id"    />
+        <result property="employeeId"    column="employee_id"    />
+        <result property="specialties"    column="specialties"    />
+        <result property="experience"    column="experience"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="imageUrls"    column="image_urls"    />
+    </resultMap>
+
+    <sql id="selectTrainerVo">
+        select trainer_id, employee_id, specialties, experience, create_by, create_time, update_by, update_time, remark, image_urls from trainer
+    </sql>
+
+    <select id="selectTrainerList" parameterType="Trainer" resultMap="TrainerResult">
+        <include refid="selectTrainerVo"/>
+        <where>  
+            <if test="employeeId != null "> and employee_id = #{employeeId}</if>
+            <if test="specialties != null  and specialties != ''"> and specialties = #{specialties}</if>
+            <if test="experience != null  and experience != ''"> and experience = #{experience}</if>
+            <if test="imageUrls != null  and imageUrls != ''"> and image_urls = #{imageUrls}</if>
+        </where>
+    </select>
+    
+    <select id="selectTrainerByTrainerId" parameterType="Long" resultMap="TrainerResult">
+        <include refid="selectTrainerVo"/>
+        where trainer_id = #{trainerId}
+    </select>
+
+    <insert id="insertTrainer" parameterType="Trainer" useGeneratedKeys="true" keyProperty="trainerId">
+        insert into trainer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="employeeId != null">employee_id,</if>
+            <if test="specialties != null">specialties,</if>
+            <if test="experience != null">experience,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="imageUrls != null">image_urls,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="employeeId != null">#{employeeId},</if>
+            <if test="specialties != null">#{specialties},</if>
+            <if test="experience != null">#{experience},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="imageUrls != null">#{imageUrls},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTrainer" parameterType="Trainer">
+        update trainer
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="employeeId != null">employee_id = #{employeeId},</if>
+            <if test="specialties != null">specialties = #{specialties},</if>
+            <if test="experience != null">experience = #{experience},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="imageUrls != null">image_urls = #{imageUrls},</if>
+        </trim>
+        where trainer_id = #{trainerId}
+    </update>
+
+    <delete id="deleteTrainerByTrainerId" parameterType="Long">
+        delete from trainer where trainer_id = #{trainerId}
+    </delete>
+
+    <delete id="deleteTrainerByTrainerIds" parameterType="String">
+        delete from trainer where trainer_id in 
+        <foreach item="trainerId" collection="array" open="(" separator="," close=")">
+            #{trainerId}
+        </foreach>
+    </delete>
+</mapper>

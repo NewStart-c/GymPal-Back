@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gym.equipmentManagement.mapper.EquipmentMaintenanceMapper">
+    
+    <resultMap type="EquipmentMaintenance" id="EquipmentMaintenanceResult">
+        <result property="maintenanceId"    column="maintenance_id"    />
+        <result property="equipmentId"    column="equipment_id"    />
+        <result property="maintenanceDate"    column="maintenance_date"    />
+        <result property="maintenanceContent"    column="maintenance_content"    />
+        <result property="maintainerId"    column="maintainer_id"    />
+        <result property="nextMaintenanceDate"    column="next_maintenance_date"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectEquipmentMaintenanceVo">
+        select maintenance_id, equipment_id, maintenance_date, maintenance_content, maintainer_id, next_maintenance_date, create_by, create_time, update_by, update_time, remark from equipment_maintenance
+    </sql>
+
+    <select id="selectEquipmentMaintenanceList" parameterType="EquipmentMaintenance" resultMap="EquipmentMaintenanceResult">
+        <include refid="selectEquipmentMaintenanceVo"/>
+        <where>  
+            <if test="equipmentId != null "> and equipment_id = #{equipmentId}</if>
+            <if test="maintenanceDate != null "> and maintenance_date = #{maintenanceDate}</if>
+            <if test="maintenanceContent != null  and maintenanceContent != ''"> and maintenance_content = #{maintenanceContent}</if>
+            <if test="maintainerId != null "> and maintainer_id = #{maintainerId}</if>
+            <if test="nextMaintenanceDate != null "> and next_maintenance_date = #{nextMaintenanceDate}</if>
+        </where>
+    </select>
+    
+    <select id="selectEquipmentMaintenanceByMaintenanceId" parameterType="Long" resultMap="EquipmentMaintenanceResult">
+        <include refid="selectEquipmentMaintenanceVo"/>
+        where maintenance_id = #{maintenanceId}
+    </select>
+
+    <insert id="insertEquipmentMaintenance" parameterType="EquipmentMaintenance" useGeneratedKeys="true" keyProperty="maintenanceId">
+        insert into equipment_maintenance
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="equipmentId != null">equipment_id,</if>
+            <if test="maintenanceDate != null">maintenance_date,</if>
+            <if test="maintenanceContent != null and maintenanceContent != ''">maintenance_content,</if>
+            <if test="maintainerId != null">maintainer_id,</if>
+            <if test="nextMaintenanceDate != null">next_maintenance_date,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="equipmentId != null">#{equipmentId},</if>
+            <if test="maintenanceDate != null">#{maintenanceDate},</if>
+            <if test="maintenanceContent != null and maintenanceContent != ''">#{maintenanceContent},</if>
+            <if test="maintainerId != null">#{maintainerId},</if>
+            <if test="nextMaintenanceDate != null">#{nextMaintenanceDate},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEquipmentMaintenance" parameterType="EquipmentMaintenance">
+        update equipment_maintenance
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="equipmentId != null">equipment_id = #{equipmentId},</if>
+            <if test="maintenanceDate != null">maintenance_date = #{maintenanceDate},</if>
+            <if test="maintenanceContent != null and maintenanceContent != ''">maintenance_content = #{maintenanceContent},</if>
+            <if test="maintainerId != null">maintainer_id = #{maintainerId},</if>
+            <if test="nextMaintenanceDate != null">next_maintenance_date = #{nextMaintenanceDate},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where maintenance_id = #{maintenanceId}
+    </update>
+
+    <delete id="deleteEquipmentMaintenanceByMaintenanceId" parameterType="Long">
+        delete from equipment_maintenance where maintenance_id = #{maintenanceId}
+    </delete>
+
+    <delete id="deleteEquipmentMaintenanceByMaintenanceIds" parameterType="String">
+        delete from equipment_maintenance where maintenance_id in 
+        <foreach item="maintenanceId" collection="array" open="(" separator="," close=")">
+            #{maintenanceId}
+        </foreach>
+    </delete>
+</mapper>

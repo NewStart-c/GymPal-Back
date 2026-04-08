@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gym.memberManagement.mapper.MemberLevelMapper">
+    
+    <resultMap type="MemberLevel" id="MemberLevelResult">
+        <result property="levelId"    column="level_id"    />
+        <result property="levelName"    column="level_name"    />
+        <result property="description"    column="description"    />
+        <result property="discountRate"    column="discount_rate"    />
+        <result property="benefits"    column="benefits"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectMemberLevelVo">
+        select level_id, level_name, description, discount_rate, benefits, create_by, create_time, update_by, update_time, remark from member_level
+    </sql>
+
+    <select id="selectMemberLevelList" parameterType="MemberLevel" resultMap="MemberLevelResult">
+        <include refid="selectMemberLevelVo"/>
+        <where>  
+            <if test="levelName != null  and levelName != ''"> and level_name like concat('%', #{levelName}, '%')</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
+            <if test="discountRate != null "> and discount_rate = #{discountRate}</if>
+            <if test="benefits != null  and benefits != ''"> and benefits = #{benefits}</if>
+        </where>
+    </select>
+    
+    <select id="selectMemberLevelByLevelId" parameterType="Long" resultMap="MemberLevelResult">
+        <include refid="selectMemberLevelVo"/>
+        where level_id = #{levelId}
+    </select>
+
+    <insert id="insertMemberLevel" parameterType="MemberLevel" useGeneratedKeys="true" keyProperty="levelId">
+        insert into member_level
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="levelName != null and levelName != ''">level_name,</if>
+            <if test="description != null">description,</if>
+            <if test="discountRate != null">discount_rate,</if>
+            <if test="benefits != null">benefits,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="levelName != null and levelName != ''">#{levelName},</if>
+            <if test="description != null">#{description},</if>
+            <if test="discountRate != null">#{discountRate},</if>
+            <if test="benefits != null">#{benefits},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMemberLevel" parameterType="MemberLevel">
+        update member_level
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="levelName != null and levelName != ''">level_name = #{levelName},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="discountRate != null">discount_rate = #{discountRate},</if>
+            <if test="benefits != null">benefits = #{benefits},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where level_id = #{levelId}
+    </update>
+
+    <delete id="deleteMemberLevelByLevelId" parameterType="Long">
+        delete from member_level where level_id = #{levelId}
+    </delete>
+
+    <delete id="deleteMemberLevelByLevelIds" parameterType="String">
+        delete from member_level where level_id in 
+        <foreach item="levelId" collection="array" open="(" separator="," close=")">
+            #{levelId}
+        </foreach>
+    </delete>
+</mapper>

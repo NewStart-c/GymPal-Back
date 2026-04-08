@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gym.trainerManagement.mapper.TrainerEvaluationMapper">
+    
+    <resultMap type="TrainerEvaluation" id="TrainerEvaluationResult">
+        <result property="evaluationId"    column="evaluation_id"    />
+        <result property="trainerId"    column="trainer_id"    />
+        <result property="memberId"    column="member_id"    />
+        <result property="score"    column="score"    />
+        <result property="comment"    column="comment"    />
+        <result property="evaluationTime"    column="evaluation_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectTrainerEvaluationVo">
+        select evaluation_id, trainer_id, member_id, score, comment, evaluation_time, create_by, create_time, update_by, update_time, remark from trainer_evaluation
+    </sql>
+
+    <select id="selectTrainerEvaluationList" parameterType="TrainerEvaluation" resultMap="TrainerEvaluationResult">
+        <include refid="selectTrainerEvaluationVo"/>
+        <where>  
+            <if test="trainerId != null "> and trainer_id = #{trainerId}</if>
+            <if test="memberId != null "> and member_id = #{memberId}</if>
+            <if test="score != null "> and score = #{score}</if>
+            <if test="comment != null  and comment != ''"> and comment = #{comment}</if>
+            <if test="evaluationTime != null "> and evaluation_time = #{evaluationTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectTrainerEvaluationByEvaluationId" parameterType="Long" resultMap="TrainerEvaluationResult">
+        <include refid="selectTrainerEvaluationVo"/>
+        where evaluation_id = #{evaluationId}
+    </select>
+
+    <insert id="insertTrainerEvaluation" parameterType="TrainerEvaluation" useGeneratedKeys="true" keyProperty="evaluationId">
+        insert into trainer_evaluation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="trainerId != null">trainer_id,</if>
+            <if test="memberId != null">member_id,</if>
+            <if test="score != null">score,</if>
+            <if test="comment != null">comment,</if>
+            <if test="evaluationTime != null">evaluation_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="trainerId != null">#{trainerId},</if>
+            <if test="memberId != null">#{memberId},</if>
+            <if test="score != null">#{score},</if>
+            <if test="comment != null">#{comment},</if>
+            <if test="evaluationTime != null">#{evaluationTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTrainerEvaluation" parameterType="TrainerEvaluation">
+        update trainer_evaluation
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="trainerId != null">trainer_id = #{trainerId},</if>
+            <if test="memberId != null">member_id = #{memberId},</if>
+            <if test="score != null">score = #{score},</if>
+            <if test="comment != null">comment = #{comment},</if>
+            <if test="evaluationTime != null">evaluation_time = #{evaluationTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where evaluation_id = #{evaluationId}
+    </update>
+
+    <delete id="deleteTrainerEvaluationByEvaluationId" parameterType="Long">
+        delete from trainer_evaluation where evaluation_id = #{evaluationId}
+    </delete>
+
+    <delete id="deleteTrainerEvaluationByEvaluationIds" parameterType="String">
+        delete from trainer_evaluation where evaluation_id in 
+        <foreach item="evaluationId" collection="array" open="(" separator="," close=")">
+            #{evaluationId}
+        </foreach>
+    </delete>
+</mapper>
