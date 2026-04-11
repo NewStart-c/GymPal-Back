@@ -2,16 +2,12 @@ package com.gym.productManagement.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.gym.common.config.RuoYiConfig;
+import com.gym.common.utils.file.FileUploadUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.gym.common.annotation.Log;
 import com.gym.common.core.controller.BaseController;
 import com.gym.common.core.domain.AjaxResult;
@@ -20,6 +16,7 @@ import com.gym.productManagement.domain.Product;
 import com.gym.productManagement.service.IProductService;
 import com.gym.common.utils.poi.ExcelUtil;
 import com.gym.common.core.page.TableDataInfo;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 商品管理Controller
@@ -33,6 +30,24 @@ public class ProductController extends BaseController
 {
     @Autowired
     private IProductService productService;
+
+    /**
+     * 商品图片上传
+     */
+    @PostMapping("/image/upload")
+    public AjaxResult uploadImage(@RequestParam("file") MultipartFile file) throws Exception {
+        if (!file.isEmpty()) {
+            // 上传到 uploadPath 目录下的 product 文件夹
+            String fileName = FileUploadUtils.upload(RuoYiConfig.getUploadPath() + "/product", file);
+
+            // 拼接前端可访问 URL：/profile + 文件相对路径
+            // 这里 /profile 是若依默认静态资源映射，固定不变，无需配置
+            String url = fileName;
+
+            return AjaxResult.success("上传成功", url);
+        }
+        return AjaxResult.error("上传图片不能为空");
+    }
 
     /**
      * 查询商品管理列表

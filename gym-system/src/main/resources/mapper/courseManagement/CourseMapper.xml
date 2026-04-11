@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gym.courseManagement.mapper.CourseMapper">
+    
+    <resultMap type="Course" id="CourseResult">
+        <result property="courseId"    column="course_id"    />
+        <result property="courseName"    column="course_name"    />
+        <result property="courseType"    column="course_type"    />
+        <result property="trainerId"    column="trainer_id"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="location"    column="location"    />
+        <result property="maxCapacity"    column="max_capacity"    />
+        <result property="currentEnrollment"    column="current_enrollment"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectCourseVo">
+        select course_id, course_name, course_type, trainer_id, start_time, end_time, location, max_capacity, current_enrollment, status, create_by, create_time, update_by, update_time, remark from course
+    </sql>
+
+    <select id="selectCourseList" parameterType="Course" resultMap="CourseResult">
+        <include refid="selectCourseVo"/>
+        <where>  
+            <if test="courseName != null  and courseName != ''"> and course_name like concat('%', #{courseName}, '%')</if>
+            <if test="courseType != null  and courseType != ''"> and course_type = #{courseType}</if>
+            <if test="trainerId != null "> and trainer_id = #{trainerId}</if>
+            <if test="startTime != null "> and start_time = #{startTime}</if>
+            <if test="endTime != null "> and end_time = #{endTime}</if>
+            <if test="location != null  and location != ''"> and location like concat('%', #{location}, '%')</if>
+            <if test="maxCapacity != null "> and max_capacity = #{maxCapacity}</if>
+            <if test="currentEnrollment != null "> and current_enrollment = #{currentEnrollment}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectCourseByCourseId" parameterType="Long" resultMap="CourseResult">
+        <include refid="selectCourseVo"/>
+        where course_id = #{courseId}
+    </select>
+
+    <insert id="insertCourse" parameterType="Course" useGeneratedKeys="true" keyProperty="courseId">
+        insert into course
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="courseName != null and courseName != ''">course_name,</if>
+            <if test="courseType != null">course_type,</if>
+            <if test="trainerId != null">trainer_id,</if>
+            <if test="startTime != null">start_time,</if>
+            <if test="endTime != null">end_time,</if>
+            <if test="location != null">location,</if>
+            <if test="maxCapacity != null">max_capacity,</if>
+            <if test="currentEnrollment != null">current_enrollment,</if>
+            <if test="status != null">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="courseName != null and courseName != ''">#{courseName},</if>
+            <if test="courseType != null">#{courseType},</if>
+            <if test="trainerId != null">#{trainerId},</if>
+            <if test="startTime != null">#{startTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="location != null">#{location},</if>
+            <if test="maxCapacity != null">#{maxCapacity},</if>
+            <if test="currentEnrollment != null">#{currentEnrollment},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCourse" parameterType="Course">
+        update course
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="courseName != null and courseName != ''">course_name = #{courseName},</if>
+            <if test="courseType != null">course_type = #{courseType},</if>
+            <if test="trainerId != null">trainer_id = #{trainerId},</if>
+            <if test="startTime != null">start_time = #{startTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="location != null">location = #{location},</if>
+            <if test="maxCapacity != null">max_capacity = #{maxCapacity},</if>
+            <if test="currentEnrollment != null">current_enrollment = #{currentEnrollment},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where course_id = #{courseId}
+    </update>
+
+    <delete id="deleteCourseByCourseId" parameterType="Long">
+        delete from course where course_id = #{courseId}
+    </delete>
+
+    <delete id="deleteCourseByCourseIds" parameterType="String">
+        delete from course where course_id in 
+        <foreach item="courseId" collection="array" open="(" separator="," close=")">
+            #{courseId}
+        </foreach>
+    </delete>
+</mapper>
