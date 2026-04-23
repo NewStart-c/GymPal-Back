@@ -103,6 +103,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where course_id = #{courseId}
     </update>
 
+    <update id="updateCurrentEnrollmentAddOne">
+        UPDATE course
+        SET current_enrollment = current_enrollment + 1
+        WHERE course_id = #{courseId}
+    </update>
+
     <delete id="deleteCourseByCourseId" parameterType="Long">
         delete from course where course_id = #{courseId}
     </delete>

@@ -27,10 +27,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectMemberList" parameterType="Member" resultMap="MemberResult">
         <include refid="selectMemberVo"/>
-        <where>  
+        <where>
+            <if test="keyword != null and keyword != ''">
+                AND (name LIKE CONCAT('%', #{keyword}, '%')
+                OR phone_number LIKE CONCAT('%', #{keyword}, '%'))
+            </if>
+
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="gender != null  and gender != ''"> and gender = #{gender}</if>
             <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
+            <!-- 排除手机号码 -->
+            <if test="excludeMemberId != null"> and member_id != #{excludeMemberId}</if>
+
             <if test="birthday != null "> and birthday = #{birthday}</if>
             <if test="registrationDate != null "> and registration_date = #{registrationDate}</if>
             <if test="memberLevelId != null "> and member_level_id = #{memberLevelId}</if>

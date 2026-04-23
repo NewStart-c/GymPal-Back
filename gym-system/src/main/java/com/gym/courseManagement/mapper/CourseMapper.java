@@ -12,6 +12,11 @@ import com.gym.courseManagement.domain.Course;
 public interface CourseMapper 
 {
     /**
+     * 根据课程ID报名人数+1
+     */
+    int updateCurrentEnrollmentAddOne(Long courseId);
+
+    /**
      * 查询课程信息
      * 
      * @param courseId 课程信息主键

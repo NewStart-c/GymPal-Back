@@ -77,6 +77,7 @@ public class CourseReservationController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody CourseReservation courseReservation)
     {
+        //courseReservation.getCourseId();
         return toAjax(courseReservationService.insertCourseReservation(courseReservation));
     }
 

@@ -21,6 +21,15 @@ public class CourseServiceImpl implements ICourseService
     private CourseMapper courseMapper;
 
     /**
+     * 通过courseId使得课程预约人数+1
+     */
+    @Override
+    public int updateCurrentEnrollmentAddOne(Long courseId){
+        return courseMapper.updateCurrentEnrollmentAddOne(courseId);
+    }
+
+
+    /**
      * 查询课程信息
      * 
      * @param courseId 课程信息主键

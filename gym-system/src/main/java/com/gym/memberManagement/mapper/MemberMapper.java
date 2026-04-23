@@ -13,7 +13,7 @@ public interface MemberMapper
 {
     /**
      * 查询会员管理
-     * 
+     *
      * @param memberId 会员管理主键
      * @return 会员管理
      */

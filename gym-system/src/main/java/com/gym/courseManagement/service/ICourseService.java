@@ -11,6 +11,12 @@ import com.gym.courseManagement.domain.Course;
  */
 public interface ICourseService 
 {
+
+    /**
+     * 通过courseId使得课程预约人数+1
+     */
+    int updateCurrentEnrollmentAddOne(Long courseId);
+
     /**
      * 查询课程信息
      * 

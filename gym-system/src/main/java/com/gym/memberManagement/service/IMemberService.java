@@ -58,4 +58,6 @@ public interface IMemberService
      * @return 结果
      */
     public int deleteMemberByMemberId(Long memberId);
+
+    int rechargeMember(Member member);
 }

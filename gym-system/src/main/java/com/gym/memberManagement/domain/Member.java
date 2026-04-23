@@ -55,6 +55,34 @@ public class Member extends BaseEntity
     @Excel(name = "状态(0正常 1冻结 2注销)")
     private String status;
 
+    private Long excludeMemberId;  // 用于校验手机号，排除自身
+
+    public Long getExcludeMemberId() { return excludeMemberId; }
+    public void setExcludeMemberId(Long excludeMemberId) { this.excludeMemberId = excludeMemberId; }
+
+
+    private String keyword; // 搜索关键词（姓名/手机号）
+
+    public String getKeyword() {
+        return keyword;
+    }
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
+    /**
+     * 充值金额
+     */
+    private BigDecimal rechargeAmount;
+
+    public BigDecimal getRechargeAmount() {
+        return rechargeAmount;
+    }
+
+    public void setRechargeAmount(BigDecimal rechargeAmount) {
+        this.rechargeAmount = rechargeAmount;
+    }
+
     public void setMemberId(Long memberId) 
     {
         this.memberId = memberId;

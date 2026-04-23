@@ -101,4 +101,13 @@ public class MemberController extends BaseController
     {
         return toAjax(memberService.deleteMemberByMemberIds(memberIds));
     }
+
+    /**
+     * 会员充值
+     */
+    @PutMapping("/recharge")
+    public AjaxResult recharge(@RequestBody Member member) {
+        return AjaxResult.success(memberService.rechargeMember(member));
+    }
+
 }

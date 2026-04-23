@@ -2,6 +2,7 @@ package com.gym.courseManagement.service.impl;
 
 import java.util.List;
 import com.gym.common.utils.DateUtils;
+import com.gym.courseManagement.mapper.CourseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.gym.courseManagement.mapper.CourseReservationMapper;
@@ -19,6 +20,8 @@ public class CourseReservationServiceImpl implements ICourseReservationService
 {
     @Autowired
     private CourseReservationMapper courseReservationMapper;
+    @Autowired
+    private CourseMapper courseMapper;
 
     /**
      * 查询课程预约
@@ -54,7 +57,14 @@ public class CourseReservationServiceImpl implements ICourseReservationService
     public int insertCourseReservation(CourseReservation courseReservation)
     {
         courseReservation.setCreateTime(DateUtils.getNowDate());
-        return courseReservationMapper.insertCourseReservation(courseReservation);
+        int rows = courseReservationMapper.insertCourseReservation(courseReservation);
+
+        if(rows > 0){
+            Long courseId = courseReservation.getCourseId();
+            courseMapper.updateCurrentEnrollmentAddOne(courseId);
+        }
+
+        return rows;
     }
 
     /**
