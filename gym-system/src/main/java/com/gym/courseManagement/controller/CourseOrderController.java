@@ -2,6 +2,8 @@ package com.gym.courseManagement.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.gym.common.utils.SecurityUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +35,17 @@ public class CourseOrderController extends BaseController
 {
     @Autowired
     private ICourseOrderService courseOrderService;
+
+    /**
+     * 会员-课程支付
+     */
+    @PostMapping("/memberPay")
+    public AjaxResult memberPay(@RequestBody CourseOrder courseOrder) {
+        Long memberId = SecurityUtils.getLoginUser().getUserId();
+        courseOrder.setMemberId(memberId);
+        courseOrder.setStatus("1"); // 已支付
+        return toAjax(courseOrderService.insertCourseOrder(courseOrder));
+    }
 
     /**
      * 查询课程订单列表

@@ -34,6 +34,9 @@ public class MemberController extends BaseController
     @Autowired
     private IMemberService memberService;
 
+
+
+
     /**
      * 查询会员管理列表
      */

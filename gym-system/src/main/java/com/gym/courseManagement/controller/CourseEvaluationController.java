@@ -2,6 +2,8 @@ package com.gym.courseManagement.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.gym.common.utils.SecurityUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +35,16 @@ public class CourseEvaluationController extends BaseController
 {
     @Autowired
     private ICourseEvaluationService courseEvaluationService;
+
+    /**
+     * 会员-提交评价
+     */
+    @PostMapping("/memberEvaluate")
+    public AjaxResult memberEvaluate(@RequestBody CourseEvaluation courseEvaluation) {
+        Long memberId = SecurityUtils.getLoginUser().getUserId();
+        courseEvaluation.setMemberId(memberId);
+        return toAjax(courseEvaluationService.insertCourseEvaluation(courseEvaluation));
+    }
 
     /**
      * 查询课程评价列表

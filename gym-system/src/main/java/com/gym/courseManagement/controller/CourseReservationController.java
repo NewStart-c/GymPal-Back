@@ -2,6 +2,9 @@ package com.gym.courseManagement.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.gym.common.utils.DateUtils;
+import com.gym.common.utils.SecurityUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +36,68 @@ public class CourseReservationController extends BaseController
 {
     @Autowired
     private ICourseReservationService courseReservationService;
+
+
+    /**
+     * 会员-我的预约列表
+     */
+    @GetMapping("/myList")
+    public AjaxResult myList() {
+        CourseReservation courseReservation = new CourseReservation();
+        Long memberId = SecurityUtils.getLoginUser().getUserId();
+        courseReservation.setMemberId(memberId);
+        //courseReservation.setDelFlag("0");
+        List<CourseReservation> list = courseReservationService.selectCourseReservationList(courseReservation);
+        return AjaxResult.success(list);
+    }
+
+    /**
+     * 会员-提交预约
+     */
+    @PostMapping("/memberReserve")
+    public AjaxResult memberReserve(@RequestBody CourseReservation courseReservation) {
+        Long memberId = SecurityUtils.getLoginUser().getUserId();
+        courseReservation.setMemberId(memberId);
+        courseReservation.setStatus("0"); // 0=已预约
+        courseReservation.setReservationTime(DateUtils.getNowDate());
+        return toAjax(courseReservationService.insertCourseReservation(courseReservation));
+    }
+
+    /**
+     * 会员-签到
+     */
+    @PostMapping("/sign/{reservationId}")
+    public AjaxResult sign(@PathVariable("reservationId") Long reservationId) {
+        CourseReservation reservation = courseReservationService.selectCourseReservationByReservationId(reservationId);
+        if (!"0".equals(reservation.getStatus())) {
+            return AjaxResult.error("只能签到待预约状态");
+        }
+        reservation.setStatus("1");
+        return toAjax(courseReservationService.updateCourseReservation(reservation));
+    }
+
+    /**
+     * 会员-消课
+     */
+    @PostMapping("/finish/{reservationId}")
+    public AjaxResult finish(@PathVariable("reservationId") Long reservationId) {
+        CourseReservation reservation = courseReservationService.selectCourseReservationByReservationId(reservationId);
+        if (!"1".equals(reservation.getStatus())) {
+            return AjaxResult.error("只能消课已签到状态");
+        }
+        reservation.setStatus("2");
+        return toAjax(courseReservationService.updateCourseReservation(reservation));
+    }
+
+    /**
+     * 会员-取消预约
+     */
+    @PostMapping("/cancel/{reservationId}")
+    public AjaxResult cancel(@PathVariable("reservationId") Long reservationId) {
+        CourseReservation reservation = courseReservationService.selectCourseReservationByReservationId(reservationId);
+        reservation.setStatus("3");
+        return toAjax(courseReservationService.updateCourseReservation(reservation));
+    }
 
     /**
      * 查询课程预约列表

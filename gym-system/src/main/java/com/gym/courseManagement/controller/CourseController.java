@@ -34,6 +34,19 @@ public class CourseController extends BaseController
     @Autowired
     private ICourseService courseService;
 
+
+    /**
+     * 会员端-查询可预约课程列表
+     */
+    @GetMapping("/member/list")
+    public AjaxResult memberList() {
+        Course course = new Course();
+        course.setStatus("0"); // 正常开课
+         //course.setDelFlag("0");
+        List<Course> list = courseService.selectCourseList(course);
+        return AjaxResult.success(list);
+    }
+
     /**
      * 查询课程信息列表
      */
