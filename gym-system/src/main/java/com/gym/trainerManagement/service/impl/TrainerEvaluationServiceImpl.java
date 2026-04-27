@@ -54,6 +54,7 @@ public class TrainerEvaluationServiceImpl implements ITrainerEvaluationService
     public int insertTrainerEvaluation(TrainerEvaluation trainerEvaluation)
     {
         trainerEvaluation.setCreateTime(DateUtils.getNowDate());
+        trainerEvaluation.setEvaluationTime(DateUtils.getNowDate());
         return trainerEvaluationMapper.insertTrainerEvaluation(trainerEvaluation);
     }
 

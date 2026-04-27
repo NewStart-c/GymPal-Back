@@ -2,6 +2,9 @@ package com.gym.memberManagement.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.gym.common.core.domain.model.LoginUser;
+import com.gym.common.utils.SecurityUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,7 +38,20 @@ public class MemberController extends BaseController
     private IMemberService memberService;
 
 
+    /**
+     * 查找自己（会员用）
+     */
+    @GetMapping("/me")
+    public AjaxResult getInfo()
+    {
+        LoginUser loginUser = getLoginUser();
+        String number = loginUser.getPhonenumber();
+        System.out.println("返回的值:" + number);
+        Member member = memberService.selectMemberByNumber(number);
+        System.out.println("返回的值:" + member);
 
+        return success(member);
+    }
 
     /**
      * 查询会员管理列表

@@ -1,5 +1,6 @@
 package com.gym.courseManagement.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.gym.common.core.domain.BaseEntity;
@@ -57,6 +58,13 @@ public class Course extends BaseEntity
     /** 状态(0待开始 1进行中 2已结束) */
     @Excel(name = "状态(0待开始 1进行中 2已结束)")
     private String status;
+
+    /** 课程价格 */
+    private BigDecimal price;
+
+    // get set
+    public BigDecimal getPrice() { return price; }
+    public void setPrice(BigDecimal price) { this.price = price; }
 
     public void setCourseId(Long courseId) 
     {

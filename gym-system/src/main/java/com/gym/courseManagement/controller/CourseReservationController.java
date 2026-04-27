@@ -3,8 +3,11 @@ package com.gym.courseManagement.controller;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
+import com.gym.common.core.domain.model.LoginUser;
 import com.gym.common.utils.DateUtils;
 import com.gym.common.utils.SecurityUtils;
+import com.gym.memberManagement.domain.Member;
+import com.gym.memberManagement.service.IMemberService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,26 +40,38 @@ public class CourseReservationController extends BaseController
     @Autowired
     private ICourseReservationService courseReservationService;
 
+    @Autowired
+    private IMemberService memberService;
 
     /**
-     * 会员-我的预约列表
+     * 会员-通过会员ID查询
      */
     @GetMapping("/myList")
     public AjaxResult myList() {
         CourseReservation courseReservation = new CourseReservation();
-        Long memberId = SecurityUtils.getLoginUser().getUserId();
+        LoginUser loginUser = getLoginUser();
+        String number = loginUser.getPhonenumber();
+        Member member = memberService.selectMemberByNumber(number);
+        Long memberId = member.getMemberId();
         courseReservation.setMemberId(memberId);
         //courseReservation.setDelFlag("0");
         List<CourseReservation> list = courseReservationService.selectCourseReservationList(courseReservation);
+
+        System.out.println("id是多少：" + memberId + "\n返回了什么:" + list);
         return AjaxResult.success(list);
     }
+
 
     /**
      * 会员-提交预约
      */
     @PostMapping("/memberReserve")
     public AjaxResult memberReserve(@RequestBody CourseReservation courseReservation) {
-        Long memberId = SecurityUtils.getLoginUser().getUserId();
+        LoginUser loginUser = getLoginUser();
+        String number = loginUser.getPhonenumber();
+        Member member = memberService.selectMemberByNumber(number);
+        Long memberId = member.getMemberId();
+
         courseReservation.setMemberId(memberId);
         courseReservation.setStatus("0"); // 0=已预约
         courseReservation.setReservationTime(DateUtils.getNowDate());

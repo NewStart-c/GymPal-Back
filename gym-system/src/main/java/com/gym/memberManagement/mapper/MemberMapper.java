@@ -58,4 +58,6 @@ public interface MemberMapper
      * @return 结果
      */
     public int deleteMemberByMemberIds(Long[] memberIds);
+
+    public Member selectMemberByNumber(String number);
 }

@@ -60,4 +60,6 @@ public interface IMemberService
     public int deleteMemberByMemberId(Long memberId);
 
     int rechargeMember(Member member);
+
+    public Member selectMemberByNumber(String number);
 }

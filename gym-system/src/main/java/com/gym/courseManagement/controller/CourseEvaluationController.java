@@ -3,6 +3,7 @@ package com.gym.courseManagement.controller;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
+import com.gym.common.utils.DateUtils;
 import com.gym.common.utils.SecurityUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,7 @@ public class CourseEvaluationController extends BaseController
     public AjaxResult memberEvaluate(@RequestBody CourseEvaluation courseEvaluation) {
         Long memberId = SecurityUtils.getLoginUser().getUserId();
         courseEvaluation.setMemberId(memberId);
+        courseEvaluation.setEvaluationTime(DateUtils.getNowDate());
         return toAjax(courseEvaluationService.insertCourseEvaluation(courseEvaluation));
     }
 

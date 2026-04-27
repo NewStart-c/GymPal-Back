@@ -175,4 +175,9 @@ public class MemberServiceImpl implements IMemberService
 
         return rows;
     }
+
+    @Override
+    public Member selectMemberByNumber(String number){
+        return memberMapper.selectMemberByNumber(number);
+    }
 }

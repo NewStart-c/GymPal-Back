@@ -132,6 +132,12 @@ public class LoginUser implements UserDetails
         return user.getUserName();
     }
 
+
+    public String getPhonenumber()
+    {
+        return user.getPhonenumber();
+    }
+
     /**
      * 账户是否未过期,过期无法验证
      */
