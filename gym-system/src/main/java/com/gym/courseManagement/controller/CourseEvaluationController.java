@@ -42,8 +42,8 @@ public class CourseEvaluationController extends BaseController
      */
     @PostMapping("/memberEvaluate")
     public AjaxResult memberEvaluate(@RequestBody CourseEvaluation courseEvaluation) {
-        Long memberId = SecurityUtils.getLoginUser().getUserId();
-        courseEvaluation.setMemberId(memberId);
+        // Long userId = SecurityUtils.getLoginUser().getUserId();
+        // courseEvaluation.setMemberId(memberId);
         courseEvaluation.setEvaluationTime(DateUtils.getNowDate());
         return toAjax(courseEvaluationService.insertCourseEvaluation(courseEvaluation));
     }

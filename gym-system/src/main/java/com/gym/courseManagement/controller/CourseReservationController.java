@@ -1,5 +1,6 @@
 package com.gym.courseManagement.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
@@ -46,8 +47,9 @@ public class CourseReservationController extends BaseController
     /**
      * 会员-通过会员ID查询
      */
-    @GetMapping("/myList")
-    public AjaxResult myList() {
+    @PostMapping("/myList")
+    public AjaxResult myList(@RequestBody CourseReservation course) {
+
         CourseReservation courseReservation = new CourseReservation();
         LoginUser loginUser = getLoginUser();
         String number = loginUser.getPhonenumber();
@@ -55,10 +57,22 @@ public class CourseReservationController extends BaseController
         Long memberId = member.getMemberId();
         courseReservation.setMemberId(memberId);
         //courseReservation.setDelFlag("0");
+
         List<CourseReservation> list = courseReservationService.selectCourseReservationList(courseReservation);
 
-        System.out.println("id是多少：" + memberId + "\n返回了什么:" + list);
-        return AjaxResult.success(list);
+
+        if(course.getStatus() == null || course.getStatus().equals("")){
+            return AjaxResult.success(list);
+        }else{
+            List<CourseReservation> nullStatusList = new ArrayList<>();
+            for (CourseReservation res : list) {
+                if (res.getStatus().equals(course.getStatus())) {
+                    nullStatusList.add(res);
+                }
+            }
+            return AjaxResult.success(nullStatusList);
+        }
+
     }
 
 
@@ -84,10 +98,10 @@ public class CourseReservationController extends BaseController
     @PostMapping("/sign/{reservationId}")
     public AjaxResult sign(@PathVariable("reservationId") Long reservationId) {
         CourseReservation reservation = courseReservationService.selectCourseReservationByReservationId(reservationId);
-        if (!"0".equals(reservation.getStatus())) {
+        if (!"1".equals(reservation.getStatus())) {
             return AjaxResult.error("只能签到待预约状态");
         }
-        reservation.setStatus("1");
+        reservation.setStatus("2");
         return toAjax(courseReservationService.updateCourseReservation(reservation));
     }
 
@@ -97,10 +111,10 @@ public class CourseReservationController extends BaseController
     @PostMapping("/finish/{reservationId}")
     public AjaxResult finish(@PathVariable("reservationId") Long reservationId) {
         CourseReservation reservation = courseReservationService.selectCourseReservationByReservationId(reservationId);
-        if (!"1".equals(reservation.getStatus())) {
+        if (!"2".equals(reservation.getStatus())) {
             return AjaxResult.error("只能消课已签到状态");
         }
-        reservation.setStatus("2");
+        reservation.setStatus("3");
         return toAjax(courseReservationService.updateCourseReservation(reservation));
     }
 

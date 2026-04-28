@@ -3,6 +3,7 @@ package com.gym.courseManagement.controller;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
+import com.gym.common.utils.DateUtils;
 import com.gym.common.utils.SecurityUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +42,10 @@ public class CourseOrderController extends BaseController
      */
     @PostMapping("/memberPay")
     public AjaxResult memberPay(@RequestBody CourseOrder courseOrder) {
-        Long memberId = SecurityUtils.getLoginUser().getUserId();
-        courseOrder.setMemberId(memberId);
+        Long userId = SecurityUtils.getLoginUser().getUserId();
         courseOrder.setStatus("1"); // 已支付
+        courseOrder.setOrderTime(DateUtils.getNowDate());
+        courseOrder.setOperatorId(userId);
         return toAjax(courseOrderService.insertCourseOrder(courseOrder));
     }
 
@@ -90,6 +92,7 @@ public class CourseOrderController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody CourseOrder courseOrder)
     {
+        courseOrder.setOrderTime(DateUtils.getNowDate());
         return toAjax(courseOrderService.insertCourseOrder(courseOrder));
     }
 
