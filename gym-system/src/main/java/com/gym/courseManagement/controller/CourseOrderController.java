@@ -40,6 +40,7 @@ public class CourseOrderController extends BaseController
     /**
      * 会员-课程支付
      */
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/memberPay")
     public AjaxResult memberPay(@RequestBody CourseOrder courseOrder) {
         Long userId = SecurityUtils.getLoginUser().getUserId();
@@ -52,7 +53,7 @@ public class CourseOrderController extends BaseController
     /**
      * 查询课程订单列表
      */
-    @PreAuthorize("@ss.hasPermi('courseManagement:courseOrder:list')")
+//    @PreAuthorize("@ss.hasPermi('courseManagement:courseOrder:list')")
     @GetMapping("/list")
     public TableDataInfo list(CourseOrder courseOrder)
     {
@@ -64,7 +65,7 @@ public class CourseOrderController extends BaseController
     /**
      * 导出课程订单列表
      */
-    @PreAuthorize("@ss.hasPermi('courseManagement:courseOrder:export')")
+//    @PreAuthorize("@ss.hasPermi('courseManagement:courseOrder:export')")
     @Log(title = "课程订单", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, CourseOrder courseOrder)
@@ -77,7 +78,7 @@ public class CourseOrderController extends BaseController
     /**
      * 获取课程订单详细信息
      */
-    @PreAuthorize("@ss.hasPermi('courseManagement:courseOrder:query')")
+//    @PreAuthorize("@ss.hasPermi('courseManagement:courseOrder:query')")
     @GetMapping(value = "/{orderId}")
     public AjaxResult getInfo(@PathVariable("orderId") Long orderId)
     {
@@ -87,7 +88,7 @@ public class CourseOrderController extends BaseController
     /**
      * 新增课程订单
      */
-    @PreAuthorize("@ss.hasPermi('courseManagement:courseOrder:add')")
+//    @PreAuthorize("@ss.hasPermi('courseManagement:courseOrder:add')")
     @Log(title = "课程订单", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody CourseOrder courseOrder)
@@ -99,7 +100,7 @@ public class CourseOrderController extends BaseController
     /**
      * 修改课程订单
      */
-    @PreAuthorize("@ss.hasPermi('courseManagement:courseOrder:edit')")
+//    @PreAuthorize("@ss.hasPermi('courseManagement:courseOrder:edit')")
     @Log(title = "课程订单", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody CourseOrder courseOrder)
@@ -110,7 +111,7 @@ public class CourseOrderController extends BaseController
     /**
      * 删除课程订单
      */
-    @PreAuthorize("@ss.hasPermi('courseManagement:courseOrder:remove')")
+//    @PreAuthorize("@ss.hasPermi('courseManagement:courseOrder:remove')")
     @Log(title = "课程订单", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{orderIds}")
     public AjaxResult remove(@PathVariable Long[] orderIds)

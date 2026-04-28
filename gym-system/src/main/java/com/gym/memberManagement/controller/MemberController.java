@@ -41,6 +41,7 @@ public class MemberController extends BaseController
     /**
      * 查找自己（会员用）
      */
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/me")
     public AjaxResult getInfo()
     {
@@ -56,7 +57,7 @@ public class MemberController extends BaseController
     /**
      * 查询会员管理列表
      */
-    @PreAuthorize("@ss.hasPermi('memberManagement:member:list')")
+//    @PreAuthorize("@ss.hasPermi('memberManagement:member:list')")
     @GetMapping("/list")
     public TableDataInfo list(Member member)
     {
@@ -68,7 +69,7 @@ public class MemberController extends BaseController
     /**
      * 导出会员管理列表
      */
-    @PreAuthorize("@ss.hasPermi('memberManagement:member:export')")
+//    @PreAuthorize("@ss.hasPermi('memberManagement:member:export')")
     @Log(title = "会员管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, Member member)
@@ -81,7 +82,7 @@ public class MemberController extends BaseController
     /**
      * 获取会员管理详细信息
      */
-    @PreAuthorize("@ss.hasPermi('memberManagement:member:query')")
+//    @PreAuthorize("@ss.hasPermi('memberManagement:member:query')")
     @GetMapping(value = "/{memberId}")
     public AjaxResult getInfo(@PathVariable("memberId") Long memberId)
     {
@@ -91,7 +92,7 @@ public class MemberController extends BaseController
     /**
      * 新增会员管理
      */
-    @PreAuthorize("@ss.hasPermi('memberManagement:member:add')")
+//    @PreAuthorize("@ss.hasPermi('memberManagement:member:add')")
     @Log(title = "会员管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Member member)
@@ -102,7 +103,7 @@ public class MemberController extends BaseController
     /**
      * 修改会员管理
      */
-    @PreAuthorize("@ss.hasPermi('memberManagement:member:edit')")
+//    @PreAuthorize("@ss.hasPermi('memberManagement:member:edit')")
     @Log(title = "会员管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Member member)
@@ -113,7 +114,7 @@ public class MemberController extends BaseController
     /**
      * 删除会员管理
      */
-    @PreAuthorize("@ss.hasPermi('memberManagement:member:remove')")
+//    @PreAuthorize("@ss.hasPermi('memberManagement:member:remove')")
     @Log(title = "会员管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{memberIds}")
     public AjaxResult remove(@PathVariable Long[] memberIds)
@@ -124,6 +125,7 @@ public class MemberController extends BaseController
     /**
      * 会员充值
      */
+    @PreAuthorize("isAuthenticated()")
     @PutMapping("/recharge")
     public AjaxResult recharge(@RequestBody Member member) {
         return AjaxResult.success(memberService.rechargeMember(member));

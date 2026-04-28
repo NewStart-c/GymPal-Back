@@ -37,7 +37,7 @@ public class RechargeRecordController extends BaseController
     /**
      * 查询储值记录列表
      */
-    @PreAuthorize("@ss.hasPermi('memberManagement:rechargeRecord:list')")
+//    @PreAuthorize("@ss.hasPermi('memberManagement:rechargeRecord:list')")
     @GetMapping("/list")
     public TableDataInfo list(RechargeRecord rechargeRecord)
     {
@@ -49,7 +49,7 @@ public class RechargeRecordController extends BaseController
     /**
      * 导出储值记录列表
      */
-    @PreAuthorize("@ss.hasPermi('memberManagement:rechargeRecord:export')")
+//    @PreAuthorize("@ss.hasPermi('memberManagement:rechargeRecord:export')")
     @Log(title = "储值记录", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, RechargeRecord rechargeRecord)
@@ -62,7 +62,7 @@ public class RechargeRecordController extends BaseController
     /**
      * 获取储值记录详细信息
      */
-    @PreAuthorize("@ss.hasPermi('memberManagement:rechargeRecord:query')")
+//    @PreAuthorize("@ss.hasPermi('memberManagement:rechargeRecord:query')")
     @GetMapping(value = "/{recordId}")
     public AjaxResult getInfo(@PathVariable("recordId") Long recordId)
     {
@@ -72,7 +72,7 @@ public class RechargeRecordController extends BaseController
     /**
      * 新增储值记录
      */
-    @PreAuthorize("@ss.hasPermi('memberManagement:rechargeRecord:add')")
+//    @PreAuthorize("@ss.hasPermi('memberManagement:rechargeRecord:add')")
     @Log(title = "储值记录", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody RechargeRecord rechargeRecord)
@@ -83,7 +83,7 @@ public class RechargeRecordController extends BaseController
     /**
      * 修改储值记录
      */
-    @PreAuthorize("@ss.hasPermi('memberManagement:rechargeRecord:edit')")
+//    @PreAuthorize("@ss.hasPermi('memberManagement:rechargeRecord:edit')")
     @Log(title = "储值记录", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody RechargeRecord rechargeRecord)
@@ -94,7 +94,7 @@ public class RechargeRecordController extends BaseController
     /**
      * 删除储值记录
      */
-    @PreAuthorize("@ss.hasPermi('memberManagement:rechargeRecord:remove')")
+//    @PreAuthorize("@ss.hasPermi('memberManagement:rechargeRecord:remove')")
     @Log(title = "储值记录", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{recordIds}")
     public AjaxResult remove(@PathVariable Long[] recordIds)

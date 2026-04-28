@@ -47,6 +47,7 @@ public class CourseReservationController extends BaseController
     /**
      * 会员-通过会员ID查询
      */
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/myList")
     public AjaxResult myList(@RequestBody CourseReservation course) {
 
@@ -79,6 +80,7 @@ public class CourseReservationController extends BaseController
     /**
      * 会员-提交预约
      */
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/memberReserve")
     public AjaxResult memberReserve(@RequestBody CourseReservation courseReservation) {
         LoginUser loginUser = getLoginUser();
@@ -95,6 +97,7 @@ public class CourseReservationController extends BaseController
     /**
      * 会员-签到
      */
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/sign/{reservationId}")
     public AjaxResult sign(@PathVariable("reservationId") Long reservationId) {
         CourseReservation reservation = courseReservationService.selectCourseReservationByReservationId(reservationId);
@@ -108,6 +111,7 @@ public class CourseReservationController extends BaseController
     /**
      * 会员-消课
      */
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/finish/{reservationId}")
     public AjaxResult finish(@PathVariable("reservationId") Long reservationId) {
         CourseReservation reservation = courseReservationService.selectCourseReservationByReservationId(reservationId);
@@ -121,6 +125,7 @@ public class CourseReservationController extends BaseController
     /**
      * 会员-取消预约
      */
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/cancel/{reservationId}")
     public AjaxResult cancel(@PathVariable("reservationId") Long reservationId) {
         CourseReservation reservation = courseReservationService.selectCourseReservationByReservationId(reservationId);
@@ -131,7 +136,7 @@ public class CourseReservationController extends BaseController
     /**
      * 查询课程预约列表
      */
-    @PreAuthorize("@ss.hasPermi('courseManagement:courseReservation:list')")
+//    @PreAuthorize("@ss.hasPermi('courseManagement:courseReservation:list')")
     @GetMapping("/list")
     public TableDataInfo list(CourseReservation courseReservation)
     {
@@ -143,7 +148,7 @@ public class CourseReservationController extends BaseController
     /**
      * 导出课程预约列表
      */
-    @PreAuthorize("@ss.hasPermi('courseManagement:courseReservation:export')")
+//    @PreAuthorize("@ss.hasPermi('courseManagement:courseReservation:export')")
     @Log(title = "课程预约", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, CourseReservation courseReservation)
@@ -156,7 +161,7 @@ public class CourseReservationController extends BaseController
     /**
      * 获取课程预约详细信息
      */
-    @PreAuthorize("@ss.hasPermi('courseManagement:courseReservation:query')")
+//    @PreAuthorize("@ss.hasPermi('courseManagement:courseReservation:query')")
     @GetMapping(value = "/{reservationId}")
     public AjaxResult getInfo(@PathVariable("reservationId") Long reservationId)
     {
@@ -166,7 +171,7 @@ public class CourseReservationController extends BaseController
     /**
      * 新增课程预约
      */
-    @PreAuthorize("@ss.hasPermi('courseManagement:courseReservation:add')")
+//    @PreAuthorize("@ss.hasPermi('courseManagement:courseReservation:add')")
     @Log(title = "课程预约", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody CourseReservation courseReservation)
@@ -178,7 +183,7 @@ public class CourseReservationController extends BaseController
     /**
      * 修改课程预约
      */
-    @PreAuthorize("@ss.hasPermi('courseManagement:courseReservation:edit')")
+//    @PreAuthorize("@ss.hasPermi('courseManagement:courseReservation:edit')")
     @Log(title = "课程预约", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody CourseReservation courseReservation)
@@ -189,7 +194,7 @@ public class CourseReservationController extends BaseController
     /**
      * 删除课程预约
      */
-    @PreAuthorize("@ss.hasPermi('courseManagement:courseReservation:remove')")
+//    @PreAuthorize("@ss.hasPermi('courseManagement:courseReservation:remove')")
     @Log(title = "课程预约", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{reservationIds}")
     public AjaxResult remove(@PathVariable Long[] reservationIds)

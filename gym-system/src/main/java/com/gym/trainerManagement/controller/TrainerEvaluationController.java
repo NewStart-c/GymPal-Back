@@ -37,7 +37,7 @@ public class TrainerEvaluationController extends BaseController
     /**
      * 查询教练评价列表
      */
-    @PreAuthorize("@ss.hasPermi('trainerManagement:evaluation:list')")
+//    @PreAuthorize("@ss.hasPermi('trainerManagement:evaluation:list')")
     @GetMapping("/list")
     public TableDataInfo list(TrainerEvaluation trainerEvaluation)
     {
@@ -49,7 +49,7 @@ public class TrainerEvaluationController extends BaseController
     /**
      * 导出教练评价列表
      */
-    @PreAuthorize("@ss.hasPermi('trainerManagement:evaluation:export')")
+//    @PreAuthorize("@ss.hasPermi('trainerManagement:evaluation:export')")
     @Log(title = "教练评价", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, TrainerEvaluation trainerEvaluation)
@@ -62,7 +62,7 @@ public class TrainerEvaluationController extends BaseController
     /**
      * 获取教练评价详细信息
      */
-    @PreAuthorize("@ss.hasPermi('trainerManagement:evaluation:query')")
+//    @PreAuthorize("@ss.hasPermi('trainerManagement:evaluation:query')")
     @GetMapping(value = "/{evaluationId}")
     public AjaxResult getInfo(@PathVariable("evaluationId") Long evaluationId)
     {
@@ -72,7 +72,7 @@ public class TrainerEvaluationController extends BaseController
     /**
      * 新增教练评价
      */
-    @PreAuthorize("@ss.hasPermi('trainerManagement:evaluation:add')")
+//    @PreAuthorize("@ss.hasPermi('trainerManagement:evaluation:add')")
     @Log(title = "教练评价", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody TrainerEvaluation trainerEvaluation)
@@ -83,7 +83,7 @@ public class TrainerEvaluationController extends BaseController
     /**
      * 修改教练评价
      */
-    @PreAuthorize("@ss.hasPermi('trainerManagement:evaluation:edit')")
+//    @PreAuthorize("@ss.hasPermi('trainerManagement:evaluation:edit')")
     @Log(title = "教练评价", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody TrainerEvaluation trainerEvaluation)
@@ -94,7 +94,7 @@ public class TrainerEvaluationController extends BaseController
     /**
      * 删除教练评价
      */
-    @PreAuthorize("@ss.hasPermi('trainerManagement:evaluation:remove')")
+//    @PreAuthorize("@ss.hasPermi('trainerManagement:evaluation:remove')")
     @Log(title = "教练评价", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{evaluationIds}")
     public AjaxResult remove(@PathVariable Long[] evaluationIds)

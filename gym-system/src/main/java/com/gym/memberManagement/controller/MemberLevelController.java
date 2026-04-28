@@ -37,7 +37,7 @@ public class MemberLevelController extends BaseController
     /**
      * 查询会员等级列表
      */
-    @PreAuthorize("@ss.hasPermi('memberManagement:mamberLevel:list')")
+//    @PreAuthorize("@ss.hasPermi('memberManagement:mamberLevel:list')")
     @GetMapping("/list")
     public TableDataInfo list(MemberLevel memberLevel)
     {
@@ -49,7 +49,7 @@ public class MemberLevelController extends BaseController
     /**
      * 导出会员等级列表
      */
-    @PreAuthorize("@ss.hasPermi('memberManagement:mamberLevel:export')")
+//    @PreAuthorize("@ss.hasPermi('memberManagement:mamberLevel:export')")
     @Log(title = "会员等级", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, MemberLevel memberLevel)
@@ -62,7 +62,7 @@ public class MemberLevelController extends BaseController
     /**
      * 获取会员等级详细信息
      */
-    @PreAuthorize("@ss.hasPermi('memberManagement:mamberLevel:query')")
+//    @PreAuthorize("@ss.hasPermi('memberManagement:mamberLevel:query')")
     @GetMapping(value = "/{levelId}")
     public AjaxResult getInfo(@PathVariable("levelId") Long levelId)
     {
@@ -72,7 +72,7 @@ public class MemberLevelController extends BaseController
     /**
      * 新增会员等级
      */
-    @PreAuthorize("@ss.hasPermi('memberManagement:mamberLevel:add')")
+//    @PreAuthorize("@ss.hasPermi('memberManagement:mamberLevel:add')")
     @Log(title = "会员等级", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody MemberLevel memberLevel)
@@ -83,7 +83,7 @@ public class MemberLevelController extends BaseController
     /**
      * 修改会员等级
      */
-    @PreAuthorize("@ss.hasPermi('memberManagement:mamberLevel:edit')")
+//    @PreAuthorize("@ss.hasPermi('memberManagement:mamberLevel:edit')")
     @Log(title = "会员等级", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody MemberLevel memberLevel)
@@ -94,7 +94,7 @@ public class MemberLevelController extends BaseController
     /**
      * 删除会员等级
      */
-    @PreAuthorize("@ss.hasPermi('memberManagement:mamberLevel:remove')")
+//    @PreAuthorize("@ss.hasPermi('memberManagement:mamberLevel:remove')")
     @Log(title = "会员等级", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{levelIds}")
     public AjaxResult remove(@PathVariable Long[] levelIds)

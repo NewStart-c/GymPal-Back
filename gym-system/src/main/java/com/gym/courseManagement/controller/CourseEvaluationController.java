@@ -40,6 +40,7 @@ public class CourseEvaluationController extends BaseController
     /**
      * 会员-提交评价
      */
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/memberEvaluate")
     public AjaxResult memberEvaluate(@RequestBody CourseEvaluation courseEvaluation) {
         // Long userId = SecurityUtils.getLoginUser().getUserId();
@@ -51,7 +52,7 @@ public class CourseEvaluationController extends BaseController
     /**
      * 查询课程评价列表
      */
-    @PreAuthorize("@ss.hasPermi('courseManagement:courseEvaluation:list')")
+//    @PreAuthorize("@ss.hasPermi('courseManagement:courseEvaluation:list')")
     @GetMapping("/list")
     public TableDataInfo list(CourseEvaluation courseEvaluation)
     {
@@ -63,7 +64,7 @@ public class CourseEvaluationController extends BaseController
     /**
      * 导出课程评价列表
      */
-    @PreAuthorize("@ss.hasPermi('courseManagement:courseEvaluation:export')")
+//    @PreAuthorize("@ss.hasPermi('courseManagement:courseEvaluation:export')")
     @Log(title = "课程评价", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, CourseEvaluation courseEvaluation)
@@ -76,7 +77,7 @@ public class CourseEvaluationController extends BaseController
     /**
      * 获取课程评价详细信息
      */
-    @PreAuthorize("@ss.hasPermi('courseManagement:courseEvaluation:query')")
+//    @PreAuthorize("@ss.hasPermi('courseManagement:courseEvaluation:query')")
     @GetMapping(value = "/{evaluationId}")
     public AjaxResult getInfo(@PathVariable("evaluationId") Long evaluationId)
     {
@@ -86,7 +87,7 @@ public class CourseEvaluationController extends BaseController
     /**
      * 新增课程评价
      */
-    @PreAuthorize("@ss.hasPermi('courseManagement:courseEvaluation:add')")
+//    @PreAuthorize("@ss.hasPermi('courseManagement:courseEvaluation:add')")
     @Log(title = "课程评价", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody CourseEvaluation courseEvaluation)
@@ -97,7 +98,7 @@ public class CourseEvaluationController extends BaseController
     /**
      * 修改课程评价
      */
-    @PreAuthorize("@ss.hasPermi('courseManagement:courseEvaluation:edit')")
+//    @PreAuthorize("@ss.hasPermi('courseManagement:courseEvaluation:edit')")
     @Log(title = "课程评价", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody CourseEvaluation courseEvaluation)
@@ -108,7 +109,7 @@ public class CourseEvaluationController extends BaseController
     /**
      * 删除课程评价
      */
-    @PreAuthorize("@ss.hasPermi('courseManagement:courseEvaluation:remove')")
+//    @PreAuthorize("@ss.hasPermi('courseManagement:courseEvaluation:remove')")
     @Log(title = "课程评价", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{evaluationIds}")
     public AjaxResult remove(@PathVariable Long[] evaluationIds)

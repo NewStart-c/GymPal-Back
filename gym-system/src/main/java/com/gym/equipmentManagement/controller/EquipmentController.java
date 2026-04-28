@@ -37,7 +37,7 @@ public class EquipmentController extends BaseController
     /**
      * 查询器材列表
      */
-    @PreAuthorize("@ss.hasPermi('equipmentManagement:equipment:list')")
+//    @PreAuthorize("@ss.hasPermi('equipmentManagement:equipment:list')")
     @GetMapping("/list")
     public TableDataInfo list(Equipment equipment)
     {
@@ -49,7 +49,7 @@ public class EquipmentController extends BaseController
     /**
      * 导出器材列表
      */
-    @PreAuthorize("@ss.hasPermi('equipmentManagement:equipment:export')")
+//    @PreAuthorize("@ss.hasPermi('equipmentManagement:equipment:export')")
     @Log(title = "器材", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, Equipment equipment)
@@ -62,7 +62,7 @@ public class EquipmentController extends BaseController
     /**
      * 获取器材详细信息
      */
-    @PreAuthorize("@ss.hasPermi('equipmentManagement:equipment:query')")
+//    @PreAuthorize("@ss.hasPermi('equipmentManagement:equipment:query')")
     @GetMapping(value = "/{equipmentId}")
     public AjaxResult getInfo(@PathVariable("equipmentId") Long equipmentId)
     {
@@ -72,7 +72,7 @@ public class EquipmentController extends BaseController
     /**
      * 新增器材
      */
-    @PreAuthorize("@ss.hasPermi('equipmentManagement:equipment:add')")
+//    @PreAuthorize("@ss.hasPermi('equipmentManagement:equipment:add')")
     @Log(title = "器材", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Equipment equipment)
@@ -83,7 +83,7 @@ public class EquipmentController extends BaseController
     /**
      * 修改器材
      */
-    @PreAuthorize("@ss.hasPermi('equipmentManagement:equipment:edit')")
+//    @PreAuthorize("@ss.hasPermi('equipmentManagement:equipment:edit')")
     @Log(title = "器材", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Equipment equipment)
@@ -94,7 +94,7 @@ public class EquipmentController extends BaseController
     /**
      * 删除器材
      */
-    @PreAuthorize("@ss.hasPermi('equipmentManagement:equipment:remove')")
+//    @PreAuthorize("@ss.hasPermi('equipmentManagement:equipment:remove')")
     @Log(title = "器材", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{equipmentIds}")
     public AjaxResult remove(@PathVariable Long[] equipmentIds)

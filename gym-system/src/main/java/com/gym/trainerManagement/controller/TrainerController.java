@@ -37,7 +37,7 @@ public class TrainerController extends BaseController
     /**
      * 查询教练管理列表
      */
-    @PreAuthorize("@ss.hasPermi('trainerManagement:trainer:list')")
+//    @PreAuthorize("@ss.hasPermi('trainerManagement:trainer:list')")
     @GetMapping("/list")
     public TableDataInfo list(Trainer trainer)
     {
@@ -49,7 +49,7 @@ public class TrainerController extends BaseController
     /**
      * 导出教练管理列表
      */
-    @PreAuthorize("@ss.hasPermi('trainerManagement:trainer:export')")
+//    @PreAuthorize("@ss.hasPermi('trainerManagement:trainer:export')")
     @Log(title = "教练管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, Trainer trainer)
@@ -62,7 +62,7 @@ public class TrainerController extends BaseController
     /**
      * 获取教练管理详细信息
      */
-    @PreAuthorize("@ss.hasPermi('trainerManagement:trainer:query')")
+//    @PreAuthorize("@ss.hasPermi('trainerManagement:trainer:query')")
     @GetMapping(value = "/{trainerId}")
     public AjaxResult getInfo(@PathVariable("trainerId") Long trainerId)
     {
@@ -72,7 +72,7 @@ public class TrainerController extends BaseController
     /**
      * 新增教练管理
      */
-    @PreAuthorize("@ss.hasPermi('trainerManagement:trainer:add')")
+//    @PreAuthorize("@ss.hasPermi('trainerManagement:trainer:add')")
     @Log(title = "教练管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Trainer trainer)
@@ -83,7 +83,7 @@ public class TrainerController extends BaseController
     /**
      * 修改教练管理
      */
-    @PreAuthorize("@ss.hasPermi('trainerManagement:trainer:edit')")
+//    @PreAuthorize("@ss.hasPermi('trainerManagement:trainer:edit')")
     @Log(title = "教练管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Trainer trainer)
@@ -94,7 +94,7 @@ public class TrainerController extends BaseController
     /**
      * 删除教练管理
      */
-    @PreAuthorize("@ss.hasPermi('trainerManagement:trainer:remove')")
+//    @PreAuthorize("@ss.hasPermi('trainerManagement:trainer:remove')")
     @Log(title = "教练管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{trainerIds}")
     public AjaxResult remove(@PathVariable Long[] trainerIds)

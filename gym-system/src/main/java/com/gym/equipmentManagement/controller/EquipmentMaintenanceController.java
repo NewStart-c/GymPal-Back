@@ -37,7 +37,7 @@ public class EquipmentMaintenanceController extends BaseController
     /**
      * 查询器材维护列表
      */
-    @PreAuthorize("@ss.hasPermi('equipmentManagement:maintenance:list')")
+//    @PreAuthorize("@ss.hasPermi('equipmentManagement:maintenance:list')")
     @GetMapping("/list")
     public TableDataInfo list(EquipmentMaintenance equipmentMaintenance)
     {
@@ -49,7 +49,7 @@ public class EquipmentMaintenanceController extends BaseController
     /**
      * 导出器材维护列表
      */
-    @PreAuthorize("@ss.hasPermi('equipmentManagement:maintenance:export')")
+//    @PreAuthorize("@ss.hasPermi('equipmentManagement:maintenance:export')")
     @Log(title = "器材维护", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, EquipmentMaintenance equipmentMaintenance)
@@ -62,7 +62,7 @@ public class EquipmentMaintenanceController extends BaseController
     /**
      * 获取器材维护详细信息
      */
-    @PreAuthorize("@ss.hasPermi('equipmentManagement:maintenance:query')")
+//    @PreAuthorize("@ss.hasPermi('equipmentManagement:maintenance:query')")
     @GetMapping(value = "/{maintenanceId}")
     public AjaxResult getInfo(@PathVariable("maintenanceId") Long maintenanceId)
     {
@@ -72,7 +72,7 @@ public class EquipmentMaintenanceController extends BaseController
     /**
      * 新增器材维护
      */
-    @PreAuthorize("@ss.hasPermi('equipmentManagement:maintenance:add')")
+//    @PreAuthorize("@ss.hasPermi('equipmentManagement:maintenance:add')")
     @Log(title = "器材维护", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody EquipmentMaintenance equipmentMaintenance)
@@ -83,7 +83,7 @@ public class EquipmentMaintenanceController extends BaseController
     /**
      * 修改器材维护
      */
-    @PreAuthorize("@ss.hasPermi('equipmentManagement:maintenance:edit')")
+//    @PreAuthorize("@ss.hasPermi('equipmentManagement:maintenance:edit')")
     @Log(title = "器材维护", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody EquipmentMaintenance equipmentMaintenance)
@@ -94,7 +94,7 @@ public class EquipmentMaintenanceController extends BaseController
     /**
      * 删除器材维护
      */
-    @PreAuthorize("@ss.hasPermi('equipmentManagement:maintenance:remove')")
+//    @PreAuthorize("@ss.hasPermi('equipmentManagement:maintenance:remove')")
     @Log(title = "器材维护", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{maintenanceIds}")
     public AjaxResult remove(@PathVariable Long[] maintenanceIds)

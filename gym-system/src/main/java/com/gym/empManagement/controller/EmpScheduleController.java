@@ -37,7 +37,7 @@ public class EmpScheduleController extends BaseController
     /**
      * 查询员工排班列表
      */
-    @PreAuthorize("@ss.hasPermi('empManagement:emp:list')")
+//    @PreAuthorize("@ss.hasPermi('empManagement:emp:list')")
     @GetMapping("/list")
     public TableDataInfo list(EmpSchedule empSchedule)
     {
@@ -49,7 +49,7 @@ public class EmpScheduleController extends BaseController
     /**
      * 导出员工排班列表
      */
-    @PreAuthorize("@ss.hasPermi('empManagement:emp:export')")
+//    @PreAuthorize("@ss.hasPermi('empManagement:emp:export')")
     @Log(title = "员工排班", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, EmpSchedule empSchedule)
@@ -62,7 +62,7 @@ public class EmpScheduleController extends BaseController
     /**
      * 获取员工排班详细信息
      */
-    @PreAuthorize("@ss.hasPermi('empManagement:emp:query')")
+//    @PreAuthorize("@ss.hasPermi('empManagement:emp:query')")
     @GetMapping(value = "/{scheduleId}")
     public AjaxResult getInfo(@PathVariable("scheduleId") Long scheduleId)
     {
@@ -72,7 +72,7 @@ public class EmpScheduleController extends BaseController
     /**
      * 新增员工排班
      */
-    @PreAuthorize("@ss.hasPermi('empManagement:emp:add')")
+//    @PreAuthorize("@ss.hasPermi('empManagement:emp:add')")
     @Log(title = "员工排班", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody EmpSchedule empSchedule)
@@ -83,7 +83,7 @@ public class EmpScheduleController extends BaseController
     /**
      * 修改员工排班
      */
-    @PreAuthorize("@ss.hasPermi('empManagement:emp:edit')")
+//    @PreAuthorize("@ss.hasPermi('empManagement:emp:edit')")
     @Log(title = "员工排班", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody EmpSchedule empSchedule)
@@ -94,7 +94,7 @@ public class EmpScheduleController extends BaseController
     /**
      * 删除员工排班
      */
-    @PreAuthorize("@ss.hasPermi('empManagement:emp:remove')")
+//    @PreAuthorize("@ss.hasPermi('empManagement:emp:remove')")
     @Log(title = "员工排班", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{scheduleIds}")
     public AjaxResult remove(@PathVariable Long[] scheduleIds)
