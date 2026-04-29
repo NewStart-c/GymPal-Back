@@ -59,5 +59,5 @@ public interface CourseReservationMapper
      */
     public int deleteCourseReservationByReservationIds(Long[] reservationIds);
 
-    public int countReservationByTrainerId(Long trainerId);
+    public Long countReservationByTrainerId(Long trainerId);
 }

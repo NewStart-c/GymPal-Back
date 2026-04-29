@@ -64,5 +64,5 @@ public interface CourseMapper
      */
     public int deleteCourseByCourseIds(Long[] courseIds);
 
-    public int countCourseByTrainerId(Long trainerId);
+    public Long countCourseByTrainerId(Long trainerId);
 }

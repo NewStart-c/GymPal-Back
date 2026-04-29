@@ -122,8 +122,8 @@ public class CoachController extends BaseController {
     @PreAuthorize("isAuthenticated()")
     public AjaxResult dashboard() {
         Long tid = getLoginTrainerId();
-        int courseCount = courseService.countCourseByTrainerId(tid);
-        int reservationCount = courseReservationService.countReservationByTrainerId(tid);
+        Long courseCount = courseService.countCourseByTrainerId(tid);
+        Long reservationCount = courseReservationService.countReservationByTrainerId(tid);
         double scoreAvg = trainerEvaluationService.getAvgScoreByTrainerId(tid);
         AjaxResult ajax = AjaxResult.success();
         ajax.put("courseCount", courseCount);

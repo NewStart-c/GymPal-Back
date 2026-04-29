@@ -30,7 +30,7 @@ public class CourseReservationServiceImpl implements ICourseReservationService
      * @return 课程预约
      */
     @Override
-    public int countReservationByTrainerId(Long trainerId) {
+    public Long countReservationByTrainerId(Long trainerId) {
         return courseReservationMapper.countReservationByTrainerId(trainerId);
     }
 

@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where evaluation_id = #{evaluationId}
     </select>
 
-    <select id="getAvgScoreByTrainerId"  parameterType="Long" resultMap="TrainerEvaluationResult">
+    <select id="getAvgScoreByTrainerId"  parameterType="Double" resultMap="TrainerEvaluationResult">
         select avg(score) from trainer_evaluation where trainer_id = #{trainerId}
     </select>
 

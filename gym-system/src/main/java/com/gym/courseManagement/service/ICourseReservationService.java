@@ -19,7 +19,7 @@ public interface ICourseReservationService
      * @param trainerId 教练id
      * @return 课程预约
      */
-    int countReservationByTrainerId(Long trainerId);
+    Long countReservationByTrainerId(Long trainerId);
 
     /**
      * 统计预约数量
