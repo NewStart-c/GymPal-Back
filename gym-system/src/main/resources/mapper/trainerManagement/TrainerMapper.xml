@@ -36,6 +36,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where trainer_id = #{trainerId}
     </select>
 
+    <select id="selectTrainerByEmployeeId" resultType="com.gym.trainerManagement.domain.Trainer">
+        <include refid="selectTrainerVo"/>
+        where employee_id = #{employeeId}
+    </select>
+
     <insert id="insertTrainer" parameterType="Trainer" useGeneratedKeys="true" keyProperty="trainerId">
         insert into trainer
         <trim prefix="(" suffix=")" suffixOverrides=",">

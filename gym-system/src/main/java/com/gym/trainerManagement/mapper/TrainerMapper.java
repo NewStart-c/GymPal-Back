@@ -58,4 +58,12 @@ public interface TrainerMapper
      * @return 结果
      */
     public int deleteTrainerByTrainerIds(Long[] trainerIds);
+
+    /**
+     * 查询教练管理
+     *
+     * @param employeeId 教练管理主键
+     * @return 教练管理
+     */
+    public Trainer selectTrainerByEmployeeId(Long employeeId);
 }

@@ -13,6 +13,14 @@ public interface ITrainerService
 {
     /**
      * 查询教练管理
+     *
+     * @param employeeId 教练管理主键
+     * @return 教练管理
+     */
+    public Trainer selectTrainerByEmployeeId(Long employeeId);
+
+    /**
+     * 查询教练管理
      * 
      * @param trainerId 教练管理主键
      * @return 教练管理
