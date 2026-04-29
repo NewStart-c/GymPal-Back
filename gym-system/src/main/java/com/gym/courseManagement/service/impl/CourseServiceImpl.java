@@ -21,6 +21,14 @@ public class CourseServiceImpl implements ICourseService
     private CourseMapper courseMapper;
 
     /**
+     * 通过trainerId计算课程数量
+     */
+    @Override
+    public int countCourseByTrainerId(Long trainerId) {
+        return courseMapper.countCourseByTrainerId(trainerId);
+    }
+
+    /**
      * 通过courseId使得课程预约人数+1
      */
     @Override

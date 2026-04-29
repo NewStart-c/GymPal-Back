@@ -63,4 +63,6 @@ public interface CourseMapper
      * @return 结果
      */
     public int deleteCourseByCourseIds(Long[] courseIds);
+
+    public int countCourseByTrainerId(Long trainerId);
 }

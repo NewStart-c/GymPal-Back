@@ -13,6 +13,11 @@ public interface ICourseService
 {
 
     /**
+     * trainerId计算课程数量
+     */
+    int countCourseByTrainerId(Long trainerId);
+
+    /**
      * 通过courseId使得课程预约人数+1
      */
     int updateCurrentEnrollmentAddOne(Long courseId);
