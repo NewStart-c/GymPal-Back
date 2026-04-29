@@ -56,6 +56,7 @@ public class CoachController extends BaseController {
     @PreAuthorize("isAuthenticated()")
     public AjaxResult getProfile() {
         Trainer trainer = trainerService.selectTrainerByTrainerId(getLoginTrainerId());
+        System.out.println("这里有东西吗？:" + trainer + "能拿到教练id吗:" + getLoginTrainerId());
         return AjaxResult.success(trainer);
     }
 

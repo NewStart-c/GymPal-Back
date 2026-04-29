@@ -36,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where trainer_id = #{trainerId}
     </select>
 
-    <select id="selectTrainerByEmployeeId" resultType="com.gym.trainerManagement.domain.Trainer">
+    <select id="selectTrainerByEmployeeId" parameterType="Long" resultMap="TrainerResult">
         <include refid="selectTrainerVo"/>
         where employee_id = #{employeeId}
     </select>
