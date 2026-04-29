@@ -7,8 +7,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.gym.common.core.domain.model.LoginUser;
 import com.gym.common.utils.DateUtils;
 import com.gym.common.utils.SecurityUtils;
+import com.gym.courseManagement.domain.Course;
+import com.gym.courseManagement.service.ICourseService;
 import com.gym.memberManagement.domain.Member;
 import com.gym.memberManagement.service.IMemberService;
+import com.gym.trainerManagement.domain.Trainer;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +46,9 @@ public class CourseReservationController extends BaseController
 
     @Autowired
     private IMemberService memberService;
+
+    @Autowired
+    private ICourseService courseService;
 
     /**
      * 会员-通过会员ID查询
@@ -87,10 +93,12 @@ public class CourseReservationController extends BaseController
         String number = loginUser.getPhonenumber();
         Member member = memberService.selectMemberByNumber(number);
         Long memberId = member.getMemberId();
+        Course course = courseService.selectCourseByCourseId(courseReservation.getCourseId());
 
         courseReservation.setMemberId(memberId);
         courseReservation.setStatus("0"); // 0=已预约
         courseReservation.setReservationTime(DateUtils.getNowDate());
+        courseReservation.setTrainerId(course.getTrainerId());
         return toAjax(courseReservationService.insertCourseReservation(courseReservation));
     }
 
