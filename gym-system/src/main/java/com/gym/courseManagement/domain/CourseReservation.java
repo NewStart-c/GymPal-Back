@@ -37,6 +37,16 @@ public class CourseReservation extends BaseEntity
     @Excel(name = "状态(0已预约 1已完成 2已取消)")
     private String status;
 
+    private Long trainerId;
+
+    public Long getTrainerId() {
+        return trainerId;
+    }
+
+    public void setTrainerId(Long trainerId) {
+        this.trainerId = trainerId;
+    }
+
     public void setReservationId(Long reservationId) 
     {
         this.reservationId = reservationId;
