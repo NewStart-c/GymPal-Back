@@ -11,6 +11,9 @@ import com.gym.trainerManagement.domain.TrainerEvaluation;
  */
 public interface TrainerEvaluationMapper 
 {
+
+    
+
     /**
      * 查询教练评价
      * 
@@ -58,4 +61,6 @@ public interface TrainerEvaluationMapper
      * @return 结果
      */
     public int deleteTrainerEvaluationByEvaluationIds(Long[] evaluationIds);
+
+    public Double getAvgScoreByTrainerId(Long trainerId);
 }

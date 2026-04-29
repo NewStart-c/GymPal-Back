@@ -38,6 +38,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where evaluation_id = #{evaluationId}
     </select>
 
+    <select id="getAvgScoreByTrainerId" resultType="java.lang.Double">
+        select avg(score) from trainer_evaluation where trainer_id = #{trainerId}
+    </select>
+
     <insert id="insertTrainerEvaluation" parameterType="TrainerEvaluation" useGeneratedKeys="true" keyProperty="evaluationId">
         insert into trainer_evaluation
         <trim prefix="(" suffix=")" suffixOverrides=",">

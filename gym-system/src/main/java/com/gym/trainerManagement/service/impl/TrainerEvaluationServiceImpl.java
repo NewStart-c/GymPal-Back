@@ -20,6 +20,20 @@ public class TrainerEvaluationServiceImpl implements ITrainerEvaluationService
     @Autowired
     private TrainerEvaluationMapper trainerEvaluationMapper;
 
+
+    /**
+     * 统计教练课程平均分
+     *
+     * @param trainerId 教练评价主键
+     * @return 统计平均分
+     */
+    @Override
+    public double getAvgScoreByTrainerId(Long trainerId) {
+        Double avg = trainerEvaluationMapper.getAvgScoreByTrainerId(trainerId);
+        return avg == null ? 0 : avg;
+    }
+
+
     /**
      * 查询教练评价
      * 

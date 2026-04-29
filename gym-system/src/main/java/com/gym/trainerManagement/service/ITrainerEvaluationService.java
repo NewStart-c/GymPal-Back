@@ -11,6 +11,15 @@ import com.gym.trainerManagement.domain.TrainerEvaluation;
  */
 public interface ITrainerEvaluationService 
 {
+
+    /**
+     * 统计教练课程平均分
+     *
+     * @param trainerId 教练评价主键
+     * @return 平均分
+     */
+    double getAvgScoreByTrainerId(Long trainerId);
+
     /**
      * 查询教练评价
      * 
