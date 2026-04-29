@@ -58,4 +58,6 @@ public interface CourseReservationMapper
      * @return 结果
      */
     public int deleteCourseReservationByReservationIds(Long[] reservationIds);
+
+    public int countReservationByTrainerId(Long trainerId);
 }

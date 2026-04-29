@@ -123,7 +123,7 @@ public class CoachController extends BaseController {
         Long tid = getLoginTrainerId();
         int courseCount = courseService.countCourseByTrainerId(tid);
         int reservationCount = courseReservationService.countReservationByTrainerId(tid);
-        double scoreAvg = trainerEvaluationService.getAvgScoreByTrainerId(tid);
+        double scoreAvg = trainerEvaluationServic.getAvgScoreByTrainerId(tid);
         AjaxResult ajax = AjaxResult.success();
         ajax.put("courseCount", courseCount);
         ajax.put("reservationCount", reservationCount);

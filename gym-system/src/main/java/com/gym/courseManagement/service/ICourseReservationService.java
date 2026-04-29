@@ -11,11 +11,21 @@ import com.gym.courseManagement.domain.CourseReservation;
  */
 public interface ICourseReservationService 
 {
+
+
     /**
      * 查询课程预约
+     *
+     * @param trainerId 教练id
+     * @return 课程预约
+     */
+    int countReservationByTrainerId(Long trainerId);
+
+    /**
+     * 统计预约数量
      * 
      * @param reservationId 课程预约主键
-     * @return 课程预约
+     * @return 预约数量
      */
     public CourseReservation selectCourseReservationByReservationId(Long reservationId);
 

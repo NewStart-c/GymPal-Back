@@ -25,6 +25,17 @@ public class CourseReservationServiceImpl implements ICourseReservationService
 
     /**
      * 查询课程预约
+     *
+     * @param trainerId 教练id
+     * @return 课程预约
+     */
+    @Override
+    public int countReservationByTrainerId(Long trainerId) {
+        return courseReservationMapper.countReservationByTrainerId(trainerId);
+    }
+
+    /**
+     * 查询课程预约
      * 
      * @param reservationId 课程预约主键
      * @return 课程预约
