@@ -48,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where course_id = #{courseId}
     </select>
 
-    <select id="countCourseByTrainerId" resultType="java.lang.Integer">
+    <select id="countCourseByTrainerId" parameterType="Long" resultMap="CourseResult">
         select count(*) from course where trainer_id = #{trainerId}
     </select>
 
