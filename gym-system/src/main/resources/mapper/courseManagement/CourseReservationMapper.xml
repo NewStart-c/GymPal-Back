@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where reservation_id = #{reservationId}
     </select>
 
-    <select id="countReservationByTrainerId" parameterType="Long" resultMap="CourseReservationResult">
+    <select id="countReservationByTrainerId" parameterType="Long" resultType="Long">
         select count(*) from course_reservation where trainer_id = #{trainerId}
     </select>
 
