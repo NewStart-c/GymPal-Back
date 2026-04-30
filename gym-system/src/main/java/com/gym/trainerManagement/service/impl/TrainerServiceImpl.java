@@ -1,7 +1,10 @@
 package com.gym.trainerManagement.service.impl;
 
 import java.util.List;
+
+import com.gym.common.core.domain.entity.SysUser;
 import com.gym.common.utils.DateUtils;
+import com.gym.system.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.gym.trainerManagement.mapper.TrainerMapper;
@@ -19,6 +22,8 @@ public class TrainerServiceImpl implements ITrainerService
 {
     @Autowired
     private TrainerMapper trainerMapper;
+    @Autowired
+    private SysUserMapper sysUserMapper;
 
     /**
      * 查询教练管理
@@ -102,5 +107,10 @@ public class TrainerServiceImpl implements ITrainerService
     public int deleteTrainerByTrainerId(Long trainerId)
     {
         return trainerMapper.deleteTrainerByTrainerId(trainerId);
+    }
+
+    @Override
+    public SysUser getTrainerSysInfo(Long employeeId){
+        return sysUserMapper.selectUserById(employeeId);
     }
 }

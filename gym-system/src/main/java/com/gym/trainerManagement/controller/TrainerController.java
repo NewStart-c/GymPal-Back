@@ -2,6 +2,8 @@ package com.gym.trainerManagement.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.gym.common.core.domain.entity.SysUser;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,6 +46,15 @@ public class TrainerController extends BaseController
         startPage();
         List<Trainer> list = trainerService.selectTrainerList(trainer);
         return getDataTable(list);
+    }
+
+    /**
+     * 查询教练个人user信息
+     */
+    @GetMapping("/profile/{employeeId}")
+    public AjaxResult getTrainerSysInfo(@PathVariable Long employeeId){
+        SysUser sysUser = trainerService.getTrainerSysInfo(employeeId);
+        return success(sysUser);
     }
 
     /**

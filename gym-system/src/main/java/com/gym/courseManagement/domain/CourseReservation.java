@@ -28,6 +28,9 @@ public class CourseReservation extends BaseEntity
     @Excel(name = "课程ID")
     private Long courseId;
 
+
+
+
     /** 预约时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "预约时间", width = 30, dateFormat = "yyyy-MM-dd")
@@ -111,5 +114,60 @@ public class CourseReservation extends BaseEntity
             .append("updateTime", getUpdateTime())
             .append("remark", getRemark())
             .toString();
+    }
+
+    private String courseName;
+    private String courseType;
+    private String courseStartTime;
+    private String location;
+    private Integer maxCapacity;
+    private Integer currentEnrollment;
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public String getCourseType() {
+        return courseType;
+    }
+
+    public void setCourseType(String courseType) {
+        this.courseType = courseType;
+    }
+
+    public String getCourseStartTime() {
+        return courseStartTime;
+    }
+
+    public void setCourseStartTime(String courseStartTime) {
+        this.courseStartTime = courseStartTime;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Integer getMaxCapacity() {
+        return maxCapacity;
+    }
+
+    public void setMaxCapacity(Integer maxCapacity) {
+        this.maxCapacity = maxCapacity;
+    }
+
+    public Integer getCurrentEnrollment() {
+        return currentEnrollment;
+    }
+
+    public void setCurrentEnrollment(Integer currentEnrollment) {
+        this.currentEnrollment = currentEnrollment;
     }
 }

@@ -1,6 +1,8 @@
 package com.gym.trainerManagement.service;
 
 import java.util.List;
+
+import com.gym.common.core.domain.entity.SysUser;
 import com.gym.trainerManagement.domain.Trainer;
 
 /**
@@ -66,4 +68,6 @@ public interface ITrainerService
      * @return 结果
      */
     public int deleteTrainerByTrainerId(Long trainerId);
+
+    public SysUser getTrainerSysInfo(Long employeeId);
 }

@@ -16,23 +16,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
         <result property="remark"    column="remark"    />
+        <result property="courseName"    column="course_name"    />
     </resultMap>
 
     <sql id="selectCourseReservationVo">
         select reservation_id, member_id, course_id, trainer_id, reservation_time, status, create_by, create_time, update_by, update_time, remark from course_reservation
     </sql>
 
+<!--    <select id="selectCourseReservationList" parameterType="CourseReservation" resultMap="CourseReservationResult">-->
+<!--        <include refid="selectCourseReservationVo"/>-->
+<!--        <where>  -->
+<!--            <if test="memberId != null "> and member_id = #{memberId}</if>-->
+<!--            <if test="courseId != null "> and course_id = #{courseId}</if>-->
+<!--            <if test="trainerId != null "> and trainer_id = #{trainerId}</if>-->
+<!--            <if test="reservationTime != null "> and reservation_time = #{reservationTime}</if>-->
+<!--            <if test="status != null  and status != ''"> and status = #{status}</if>-->
+<!--        </where>-->
+<!--    </select>-->
     <select id="selectCourseReservationList" parameterType="CourseReservation" resultMap="CourseReservationResult">
-        <include refid="selectCourseReservationVo"/>
-        <where>  
-            <if test="memberId != null "> and member_id = #{memberId}</if>
-            <if test="courseId != null "> and course_id = #{courseId}</if>
-            <if test="trainerId != null "> and trainer_id = #{trainerId}</if>
-            <if test="reservationTime != null "> and reservation_time = #{reservationTime}</if>
-            <if test="status != null  and status != ''"> and status = #{status}</if>
+        SELECT
+        cr.*,
+        c.course_name,
+        c.course_type,
+        c.location,
+        c.max_capacity,
+        c.current_enrollment
+        FROM course_reservation cr
+        LEFT JOIN course c ON cr.course_id = c.course_id
+        <where>
+            <if test="memberId != null "> and cr.member_id = #{memberId}</if>
+            <if test="courseId != null "> and cr.course_id = #{courseId}</if>
+            <if test="trainerId != null "> and cr.trainer_id = #{trainerId}</if>
+            <if test="reservationTime != null "> and cr.reservation_time = #{reservationTime}</if>
+            <if test="status != null  and status != ''"> and cr.status = #{status}</if>
         </where>
     </select>
-    
+
+
     <select id="selectCourseReservationByReservationId" parameterType="Long" resultMap="CourseReservationResult">
         <include refid="selectCourseReservationVo"/>
         where reservation_id = #{reservationId}
