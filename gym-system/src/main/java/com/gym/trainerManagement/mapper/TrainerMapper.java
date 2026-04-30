@@ -66,4 +66,6 @@ public interface TrainerMapper
      * @return 教练管理
      */
     public Trainer selectTrainerByEmployeeId(Long employeeId);
+
+    public Long getLastTrainerId();
 }

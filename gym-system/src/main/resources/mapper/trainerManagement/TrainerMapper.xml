@@ -67,6 +67,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
+    <select id="getLastTrainerId" resultType="java.lang.Long">
+        SELECT MAX(trainer_id) FROM trainer
+    </select>
+
     <update id="updateTrainer" parameterType="Trainer">
         update trainer
         <trim prefix="SET" suffixOverrides=",">

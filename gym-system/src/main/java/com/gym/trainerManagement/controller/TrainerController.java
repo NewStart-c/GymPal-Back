@@ -88,7 +88,10 @@ public class TrainerController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody Trainer trainer)
     {
-        return toAjax(trainerService.insertTrainer(trainer));
+
+        int res = trainerService.insertTrainer(trainer);
+
+        return toAjax(res);
     }
 
     /**

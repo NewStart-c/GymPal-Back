@@ -12,6 +12,8 @@ import com.gym.common.core.domain.entity.SysUser;
  */
 public interface SysUserMapper
 {
+    public Long getLastSysUserId();
+
     /**
      * 根据条件分页查询用户列表
      * 
