@@ -1,6 +1,8 @@
 package com.gym.courseManagement.mapper;
 
 import java.util.List;
+import java.util.Map;
+
 import com.gym.courseManagement.domain.Course;
 
 /**
@@ -73,4 +75,6 @@ public interface CourseMapper
      * @return 课程信息集合
      */
     public List<Course> selectCourseListByTrainerId(Long tid);
+
+    List<Map<String, Object>> getCourseTypeCount(Long tid);
 }

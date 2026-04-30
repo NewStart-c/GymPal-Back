@@ -150,7 +150,7 @@ public class CoachController extends BaseController {
         double money = courseOrderService.getMoneyByTrainerId(tid);
 
         List<Integer> reservation7Days = courseReservationService.getReservationLast7Days(tid);
-        //List<Map<String, Object>> courseTypeData = courseService.getCourseTypeCount(tid);
+        List<Map<String, Object>> courseTypeData = courseService.getCourseTypeCount(tid);
 
         Map<String, Object> map = new HashMap<>();
         map.put("courseCount", courseCount);
@@ -160,7 +160,7 @@ public class CoachController extends BaseController {
 
         // 图表数据
         map.put("reservation7Days", reservation7Days);
-        //map.put("courseTypeData", courseTypeData);
+        map.put("courseTypeData", courseTypeData);
 
         return AjaxResult.success(map);
     }

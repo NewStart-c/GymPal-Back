@@ -57,6 +57,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where trainer_id = #{tid}
     </select>
 
+    <select id="getCourseTypeCount" resultType="java.util.Map">
+        SELECT
+        course_name AS name,     <!-- 课程名称 -->
+        current_enrollment AS value  <!-- 已报名人数 -->
+        FROM course
+        WHERE trainer_id = #{tid}
+    </select>
+
     <insert id="insertCourse" parameterType="Course" useGeneratedKeys="true" keyProperty="courseId">
         insert into course
         <trim prefix="(" suffix=")" suffixOverrides=",">

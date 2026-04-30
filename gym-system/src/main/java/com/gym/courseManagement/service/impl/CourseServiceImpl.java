@@ -1,6 +1,8 @@
 package com.gym.courseManagement.service.impl;
 
 import java.util.List;
+import java.util.Map;
+
 import com.gym.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -109,5 +111,10 @@ public class CourseServiceImpl implements ICourseService
     public int deleteCourseByCourseId(Long courseId)
     {
         return courseMapper.deleteCourseByCourseId(courseId);
+    }
+
+    @Override
+    public List<Map<String, Object>> getCourseTypeCount(Long tid) {
+        return courseMapper.getCourseTypeCount(tid);
     }
 }

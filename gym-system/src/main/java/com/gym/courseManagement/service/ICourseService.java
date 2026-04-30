@@ -1,6 +1,8 @@
 package com.gym.courseManagement.service;
 
 import java.util.List;
+import java.util.Map;
+
 import com.gym.courseManagement.domain.Course;
 
 /**
@@ -69,4 +71,6 @@ public interface ICourseService
      * @return 结果
      */
     public int deleteCourseByCourseId(Long courseId);
+
+    public List<Map<String, Object>> getCourseTypeCount(Long tid);
 }
