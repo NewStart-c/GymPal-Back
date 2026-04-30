@@ -62,6 +62,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select count(*) from course_reservation where trainer_id = #{trainerId}
     </select>
 
+    <select id="getReservationLast7Days" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM course_reservation
+        WHERE trainer_id = #{trainerId}
+          AND reservation_time >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
+        GROUP BY DATE(reservation_time)
+        ORDER BY DATE(reservation_time)
+    </select>
+
     <insert id="insertCourseReservation" parameterType="CourseReservation" useGeneratedKeys="true" keyProperty="reservationId">
         insert into course_reservation
         <trim prefix="(" suffix=")" suffixOverrides=",">

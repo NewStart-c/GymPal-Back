@@ -68,4 +68,7 @@ public interface ICourseReservationService
      * @return 结果
      */
     public int deleteCourseReservationByReservationId(Long reservationId);
+
+    List<Integer> getReservationLast7Days(Long tid);
+
 }

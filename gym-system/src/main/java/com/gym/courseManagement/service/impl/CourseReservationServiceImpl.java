@@ -23,6 +23,11 @@ public class CourseReservationServiceImpl implements ICourseReservationService
     @Autowired
     private CourseMapper courseMapper;
 
+
+    @Override
+    public List<Integer> getReservationLast7Days(Long tid) {
+        return courseReservationMapper.getReservationLast7Days(tid);
+    }
     /**
      * 查询课程预约
      *

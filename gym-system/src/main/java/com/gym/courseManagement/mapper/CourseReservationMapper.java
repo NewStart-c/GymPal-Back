@@ -60,4 +60,6 @@ public interface CourseReservationMapper
     public int deleteCourseReservationByReservationIds(Long[] reservationIds);
 
     public Long countReservationByTrainerId(Long trainerId);
+
+    public List<Integer> getReservationLast7Days(Long tid);
 }

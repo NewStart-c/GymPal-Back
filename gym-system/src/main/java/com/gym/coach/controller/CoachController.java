@@ -19,7 +19,10 @@ import com.gym.common.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 教练端统一接口
@@ -145,11 +148,22 @@ public class CoachController extends BaseController {
         System.out.println("教练ID是否返回：" + tid + "课程数量：" + courseCount + "预约数量:" + reservationCount);
         double scoreAvg = trainerEvaluationService.getAvgScoreByTrainerId(tid);
         double money = courseOrderService.getMoneyByTrainerId(tid);
-        AjaxResult ajax = AjaxResult.success();
-        ajax.put("courseCount", courseCount);
-        ajax.put("reservationCount", reservationCount);
-        ajax.put("scoreAvg", scoreAvg);
-        ajax.put("money", money);
-        return ajax;
+
+        List<Integer> reservation7Days = courseReservationService.getReservationLast7Days(tid);
+        //List<Map<String, Object>> courseTypeData = courseService.getCourseTypeCount(tid);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("courseCount", courseCount);
+        map.put("reservationCount", reservationCount);
+        map.put("scoreAvg", scoreAvg);
+        map.put("money", money);
+
+        // 图表数据
+        map.put("reservation7Days", reservation7Days);
+        //map.put("courseTypeData", courseTypeData);
+
+        return AjaxResult.success(map);
     }
+
+
 }
