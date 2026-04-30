@@ -43,6 +43,20 @@ public class CoachController extends BaseController {
     @Autowired
     private IEmpScheduleService empScheduleService;
 
+
+    // ====================== 教练ID获取 ======================
+    @GetMapping("/trainerID")
+    @PreAuthorize("isAuthenticated()")
+    public AjaxResult getLoginTrainerIdFront() {
+        //String username = SecurityUtils.getUsername();
+        LoginUser loginUser = getLoginUser();
+        Long employeeId = loginUser.getUserId();
+        Trainer t = trainerService.selectTrainerByEmployeeId(employeeId);
+        System.out.println("前端获取id了吗？:" + t.getTrainerId());
+
+        return AjaxResult.success(t);
+    }
+
     private Long getLoginTrainerId() {
         //String username = SecurityUtils.getUsername();
         LoginUser loginUser = getLoginUser();
@@ -124,6 +138,7 @@ public class CoachController extends BaseController {
         Long tid = getLoginTrainerId();
         Long courseCount = courseService.countCourseByTrainerId(tid);
         Long reservationCount = courseReservationService.countReservationByTrainerId(tid);
+        System.out.println("教练ID是否返回：" + tid + "课程数量：" + courseCount + "预约数量:" + reservationCount);
         double scoreAvg = trainerEvaluationService.getAvgScoreByTrainerId(tid);
         AjaxResult ajax = AjaxResult.success();
         ajax.put("courseCount", courseCount);
