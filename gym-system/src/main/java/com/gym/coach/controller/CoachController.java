@@ -6,6 +6,7 @@ import com.gym.common.core.domain.model.LoginUser;
 import com.gym.common.core.page.TableDataInfo;
 import com.gym.courseManagement.domain.Course;
 import com.gym.courseManagement.domain.CourseReservation;
+import com.gym.courseManagement.service.ICourseOrderService;
 import com.gym.courseManagement.service.ICourseReservationService;
 import com.gym.courseManagement.service.ICourseService;
 import com.gym.trainerManagement.domain.Trainer;
@@ -42,6 +43,9 @@ public class CoachController extends BaseController {
 
     @Autowired
     private IEmpScheduleService empScheduleService;
+
+    @Autowired
+    private ICourseOrderService courseOrderService;
 
 
     // ====================== 教练ID获取 ======================
@@ -140,10 +144,12 @@ public class CoachController extends BaseController {
         Long reservationCount = courseReservationService.countReservationByTrainerId(tid);
         System.out.println("教练ID是否返回：" + tid + "课程数量：" + courseCount + "预约数量:" + reservationCount);
         double scoreAvg = trainerEvaluationService.getAvgScoreByTrainerId(tid);
+        double money = courseOrderService.getMoneyByTrainerId(tid);
         AjaxResult ajax = AjaxResult.success();
         ajax.put("courseCount", courseCount);
         ajax.put("reservationCount", reservationCount);
         ajax.put("scoreAvg", scoreAvg);
+        ajax.put("money", money);
         return ajax;
     }
 }

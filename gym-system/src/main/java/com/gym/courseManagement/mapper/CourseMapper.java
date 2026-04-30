@@ -65,4 +65,12 @@ public interface CourseMapper
     public int deleteCourseByCourseIds(Long[] courseIds);
 
     public Long countCourseByTrainerId(Long trainerId);
+
+    /**
+     * 查询课程信息列表
+     *
+     * @param tid 教练id
+     * @return 课程信息集合
+     */
+    public List<Course> selectCourseListByTrainerId(Long tid);
 }

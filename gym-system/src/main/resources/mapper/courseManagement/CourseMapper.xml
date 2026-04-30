@@ -52,6 +52,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select count(*) from course where trainer_id = #{trainerId}
     </select>
 
+    <select id="selectCourseListByTrainerId" parameterType="Long" resultMap="CourseResult">
+        <include refid="selectCourseVo"/>
+        where trainer_id = #{tid}
+    </select>
+
     <insert id="insertCourse" parameterType="Course" useGeneratedKeys="true" keyProperty="courseId">
         insert into course
         <trim prefix="(" suffix=")" suffixOverrides=",">

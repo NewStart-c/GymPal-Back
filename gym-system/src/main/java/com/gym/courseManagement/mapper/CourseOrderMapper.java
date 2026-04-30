@@ -19,6 +19,8 @@ public interface CourseOrderMapper
      */
     public CourseOrder selectCourseOrderByOrderId(Long orderId);
 
+    public List<CourseOrder> selectCourseOrderByCourseId(Long courseId);
+
     /**
      * 查询课程订单列表
      * 

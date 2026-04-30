@@ -58,4 +58,6 @@ public interface ICourseOrderService
      * @return 结果
      */
     public int deleteCourseOrderByOrderId(Long orderId);
+
+    double getMoneyByTrainerId(Long tid);
 }
